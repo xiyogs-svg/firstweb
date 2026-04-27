@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>Search</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Helvetica, Arial;
+  padding: 100px 40px;
+}
+
+/* 标题 */
+h1 {
+  font-size: 24px;
+  margin-bottom: 40px;
+}
+
+/* 网格 */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+/* 卡片 */
+.card img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+}
+
+.card p {
+  margin-top: 10px;
+  font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<h1 id="resultTitle"></h1>
+
+<div class="grid" id="results"></div>
+
+<script>
+/* 商品数据（你可以自己扩展） */
+const products = [
+  { name: "KIRO Necklace", img: "images/kiro1.jpg" },
+  { name: "KIRO Ring", img: "images/kiro2.jpg" },
+  { name: "Aiden Bag", img: "images/aiden.jpg" },
+  { name: "Spring Dress", img: "images/pic3.jpg" },
+  { name: "Leather Bag", img: "images/pic4.jpg" },
+  { name: "Minimal Earrings", img: "images/pic5.jpg" }
+];
+
+/* 获取关键词 */
+const params = new URLSearchParams(window.location.search);
+const query = params.get("q");
+
+/* 标题 */
+document.getElementById("resultTitle").innerText = 
+  `Search results for "${query}"`;
+
+/* 筛选 */
+const filtered = products.filter(p =>
+  p.name.toLowerCase().includes(query.toLowerCase())
+);
+
+/* 渲染 */
+const container = document.getElementById("results");
+
+if (filtered.length === 0) {
+  container.innerHTML = "<p>No results found.</p>";
+} else {
+  filtered.forEach(p => {
+    container.innerHTML += `
+      <div class="card">
+        <img src="${p.img}">
+        <p>${p.name}</p>
+      </div>
+    `;
+  });
+}
+</script>
+
+</body>
+</html>

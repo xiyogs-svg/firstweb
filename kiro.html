@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>KIRO COLLECTION</title>
+
+<!-- 字体（接近KHAITE） -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+body {
+  margin: 0;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #111;
+  background: #fff;
+}
+
+.site-header {
+  position: fixed;   /* 和首页一致 */
+  top: 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 24px 40px;
+  background: rgba(255,255,255,0.9);
+  backdrop-filter: blur(10px);
+  z-index: 999;
+}
+
+/* 左右 */
+.nav-left,
+.nav-right {
+  display: flex;
+  gap: 28px;
+}
+
+.nav-right {
+  justify-content: flex-end;
+}
+
+/* logo */
+.logo {
+  font-size: 34px;
+  letter-spacing: 2px;
+  text-decoration: none;
+  color: #111;
+}
+
+/* link */
+.site-header a {
+  font-size: 14px;
+  text-decoration: none;
+  color: #111;
+  transition: 0.2s;
+}
+
+.site-header a:hover {
+  opacity: 0.5;
+}
+
+/* ===== 首屏 ===== */
+.hero {
+  padding-top: 120px;
+  text-align: center;
+  position: relative;
+}
+
+/* 返回 */
+.back {
+  position: absolute;
+  left: 40px;
+  top: 120px;
+  font-size: 13px;
+  text-decoration: none;
+  color: #111;
+}
+
+/* 标题 */
+.title {
+  font-family: "Playfair Display", serif;
+  font-size: 40px;
+  letter-spacing: 2px;
+  margin-bottom: 60px;
+}
+
+/* 横图 */
+.hero-img {
+  width: 100%;
+  max-width: 2100px;
+  margin: 0 auto;
+}
+
+.hero-img img {
+  width: 100%;
+  aspect-ratio: 2 / 1;
+  object-fit: cover;
+}
+
+/* ===== 商品网格 ===== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin-top: 80px;
+}
+
+/* 商品卡 */
+.card {
+  padding: 40px 20px 20px;
+  text-decoration: none;
+  color: #111;
+}
+
+/* 图片 */
+.img-wrap {
+  position: relative;
+  height: 320px;
+}
+
+.img-wrap img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.4s;
+}
+
+.img-hover {
+  opacity: 0;
+}
+
+.card:hover .img-hover {
+  opacity: 1;
+}
+
+.card:hover .img-main {
+  opacity: 0;
+}
+
+/* 信息 */
+.info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+
+.price {
+  color: #666;
+}
+</style>
+</head>
+
+<body>
+
+<header class="site-header">
+
+  <div class="nav-left">
+    <a href="#">Featured</a>
+    <a href="collection.html">Shop</a>
+    <a href="#">Leather Goods</a>
+    <a href="#">Collections</a>
+  </div>
+
+  <div class="nav-center">
+    <a href="index.html" class="logo">PURE CRAFT</a>
+  </div>
+
+  <div class="nav-right">
+    <a href="#">Search</a>
+    <a href="#">Account</a>
+    <a href="cart.html">Cart</a>
+  </div>
+
+</header>
+
+<!-- ===== 首屏 ===== -->
+<section class="hero">
+
+  <a href="index.html" class="back">← Back</a>
+
+  <div class="title">KIRO COLLECTION</div>
+
+  <div class="hero-img">
+    <img src="images/kirobanner.jpg">
+  </div>
+
+</section>
+
+<!-- ===== 商品 ===== -->
+<section class="grid">
+
+  <a href="kiro1.html" class="card">
+    <div class="img-wrap">
+      <img src="images/kiro1.jpg" class="img-main">
+      <img src="images/kiro1.png" class="img-hover">
+    </div>
+    <div class="info">
+      <span>TEVIS TOP</span>
+      <span class="price">$4,500</span>
+    </div>
+  </a>
+
+  <a href="kiro2.html" class="card">
+    <div class="img-wrap">
+      <img src="images/kiro2.3.png" class="img-main">
+      <img src="images/kiro2.1.jpg" class="img-hover">
+    </div>
+    <div class="info">
+      <span>KILIAN SKIRT</span>
+      <span class="price">$990</span>
+    </div>
+  </a>
+
+  <a href="kiro3.html" class="card">
+    <div class="img-wrap">
+      <img src="images/case21.png" class="img-main">
+      <img src="images/case23.png" class="img-hover">
+    </div>
+    <div class="info">
+      <span>BLAKE CLUTCH</span>
+      <span class="price">$3,200</span>
+    </div>
+  </a>
+
+  <a href="kiro4.html" class="card">
+    <div class="img-wrap">
+      <img src="images/kiro5.11.png" class="img-main">
+      <img src="images/kiro5.1.jpg" class="img-hover">
+    </div>
+    <div class="info">
+      <span>MILLY PUMP</span>
+      <span class="price">$1,250</span>
+    </div>
+  </a>
+<!-- 新增第2排（只新增，不替换） -->
+
+<a href="case5.html" class="card">
+  <div class="img-wrap">
+    <img src="images/kiro2.jpg" class="img-main">
+    <img src="images/kiro3.jpg" class="img-hover">
+  </div>
+  <div class="info">
+    <span>KIRO RING</span>
+    <span class="price">$680</span>
+  </div>
+</a>
+
+<a href="case6.html" class="card">
+  <div class="img-wrap">
+    <img src="images/kiro3.jpg" class="img-main">
+    <img src="images/kiro4.jpg" class="img-hover">
+  </div>
+  <div class="info">
+    <span>STRUCT BAG</span>
+    <span class="price">$2,100</span>
+  </div>
+</a>
+
+<a href="case7.html" class="card">
+  <div class="img-wrap">
+    <img src="images/kiro4.jpg" class="img-main">
+    <img src="images/kiro5.jpg" class="img-hover">
+  </div>
+  <div class="info">
+    <span>VOID NECKLACE</span>
+    <span class="price">$1,480</span>
+  </div>
+</a>
+
+<a href="case8.html" class="card">
+  <div class="img-wrap">
+    <img src="images/kiro5.jpg" class="img-main">
+    <img src="images/kiro2.jpg" class="img-hover">
+  </div>
+  <div class="info">
+    <span>KIRO HEELS</span>
+    <span class="price">$1,320</span>
+  </div>
+</a>
+</section>
+
+</body>
+</html>

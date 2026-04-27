@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>Collection</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #111;
+  background: #fff;
+}
+
+/* ===== 顶部导航 ===== */
+.site-header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 24px 40px;
+  z-index: 100;
+  background: rgba(255,255,255,0.95);
+}
+
+.nav-left, .nav-right {
+  display: flex;
+  gap: 28px;
+}
+
+.nav-right {
+  justify-content: flex-end;
+}
+
+.site-header a {
+  text-decoration: none;
+  color: #111;
+  font-size: 14px;
+}
+
+.logo {
+  font-size: 28px;
+  letter-spacing: 2px;
+}
+
+/* ===== 主体 ===== */
+.wrapper {
+  padding-top: 100px;
+}
+
+/* 标题 */
+.title {
+  text-align: center;
+  margin: 120px 0 80px;
+}
+
+.title h1 {
+  font-size: 36px;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+/* 图片块 */
+.block {
+  margin-bottom: 80px;
+}
+
+.block img {
+  width: 60%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* 文字 */
+.text {
+  max-width: 600px;
+  margin: 100px auto;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.8;
+  color: #444;
+}
+
+/* 按钮 */
+.cta {
+  text-align: center;
+  margin: 100px 0 140px;
+}
+
+.btn {
+  display: inline-block;
+  padding: 14px 30px;
+  border: 1px solid black;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: black;
+  color: white;
+}
+
+/* 返回 */
+.back {
+  position: fixed;
+  top: 100px;
+  left: 40px;
+  font-size: 13px;
+  text-decoration: none;
+  color: #111;
+}
+</style>
+</head>
+
+<body>
+
+<header class="site-header">
+  <div class="nav-left">
+    <a href="#">Featured</a>
+    <a href="#">Shop</a>
+    <a href="#">Collections</a>
+  </div>
+
+  <div class="nav-center">
+    <a href="index.html" class="logo">PURE CRAFT</a>
+  </div>
+
+  <div class="nav-right">
+    <a href="#">Search</a>
+    <a href="cart.html">Cart</a>
+  </div>
+</header>
+
+<a href="javascript:history.back()" class="back">← Back</a>
+
+<div class="wrapper">
+
+  <!-- 标题 -->
+  <div class="title">
+    <h1>KIRO COLLECTION</h1>
+  </div>
+
+  <!-- 图片流 -->
+  <div class="block">
+    <img src="images/kiro1.png">
+  </div>
+
+  <div class="block">
+    <img src="images/kiro1.jpg">
+  </div>
+
+  <div class="block">
+    <img src="images/case1.1.jpg">
+  </div>
+
+  <!-- 文字 -->
+  <div class="text">
+    A refined expression of modern craftsmanship.  
+    Designed with structure, balance, and restraint.
+  </div>
+
+  <!-- CTA -->
+  <div class="cta">
+    <div class="btn" onclick="addToCart()">Add to Cart</div>
+  </div>
+
+</div>
+
+<script>
+function addToCart() {
+  const product = {
+    id: "vintage-necklace",
+    name: "Vintage Necklace",
+    price: 299,
+    image: "images/kiro.jpg",
+    qty: 1
+  };
+
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  const existing = cart.find(i => i.id === product.id);
+
+  if (existing) {
+    existing.qty += 1;
+  } else {
+    cart.push(product);
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+
+  window.location.href = "cart.html";
+}
+</script>
+
+</body>
+</html>
