@@ -13,10 +13,25 @@ body {
   color: #111;
 }
 
+.promo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 34px;
+  background: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  z-index: 1000;
+}
+
 /* 顶部导航 */
 .site-header {
   position: fixed;
-  top: 0;
+  top: 34px;
   left: 0;
   width: 100%;
   display: grid;
@@ -257,7 +272,7 @@ body {
 /* 搜索栏 */
 .search-bar {
   position: fixed;
-  top: 80px;
+  top: 114px;
   left: 0;
   width: 100%;
   background: white;
@@ -286,10 +301,214 @@ body {
   font-size: 18px;
   font-family: Helvetica, Arial;
 }
+
+.cart-shade {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.18);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s ease;
+  z-index: 1000;
+}
+
+.cart-shade.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: min(39vw, 640px);
+  min-width: 440px;
+  height: 100vh;
+  background: #fff;
+  z-index: 1001;
+  transform: translateX(100%);
+  transition: transform 0.32s ease;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  padding: 46px 32px 28px;
+}
+
+.cart-drawer.active {
+  transform: translateX(0);
+}
+
+.cart-drawer-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 44px;
+}
+
+.cart-drawer-head h2 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 25px;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.cart-close {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-size: 34px;
+  line-height: 1;
+  color: #111;
+}
+
+.drawer-items {
+  flex: 1;
+  overflow: auto;
+}
+
+.drawer-item {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  gap: 22px;
+  margin-bottom: 32px;
+}
+
+.drawer-item img {
+  width: 170px;
+  height: 240px;
+  object-fit: cover;
+  background: #f7f7f7;
+}
+
+.drawer-info {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 20px;
+  align-content: start;
+  padding-top: 56px;
+}
+
+.drawer-name {
+  margin: 0 0 8px;
+  font-size: 14px;
+  letter-spacing: 0.7px;
+  text-transform: uppercase;
+}
+
+.drawer-price,
+.drawer-meta {
+  margin: 0 0 8px;
+  font-size: 14px;
+  color: #333;
+}
+
+.drawer-qty {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-top: 26px;
+  font-size: 18px;
+}
+
+.drawer-qty button,
+.drawer-remove {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: #111;
+  font-family: inherit;
+}
+
+.drawer-qty button {
+  font-size: 22px;
+  padding: 0;
+}
+
+.drawer-remove {
+  align-self: end;
+  border-bottom: 1px solid #111;
+  padding: 0 0 3px;
+  font-size: 14px;
+}
+
+.drawer-empty {
+  display: none;
+  color: #555;
+  font-size: 15px;
+}
+
+.drawer-footer {
+  border-top: 1px solid #eee;
+  padding-top: 22px;
+}
+
+.drawer-note {
+  margin: 0 0 18px;
+  color: #999;
+  font-size: 13px;
+}
+
+.drawer-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 20px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 24px;
+  font-style: italic;
+}
+
+.drawer-checkout {
+  display: block;
+  width: 100%;
+  padding: 18px;
+  background: #000;
+  color: #fff;
+  border: 0;
+  font-size: 18px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.drawer-cart-link {
+  display: block;
+  width: max-content;
+  margin: 22px auto 0;
+  color: #111;
+  border-bottom: 1px solid #111;
+  padding-bottom: 4px;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+@media (max-width: 760px) {
+  .cart-drawer {
+    width: 100vw;
+    min-width: 0;
+    padding: 34px 22px 24px;
+  }
+
+  .drawer-item {
+    grid-template-columns: 120px 1fr;
+  }
+
+  .drawer-item img {
+    width: 120px;
+    height: 170px;
+  }
+
+  .drawer-info {
+    padding-top: 12px;
+  }
+}
 </style>
 </head>
 
 <body>
+<div class="promo">Complimentary shipping on all orders worldwide.</div>
 
 <header class="site-header">
 
@@ -441,13 +660,32 @@ body {
 </a>
     <a href="#">Stores</a>
     <a href="#">Account</a>
-    <a href="cart.html">Cart (2)</a>
+    <a href="cart.html" id="cartLink" onclick="openCartDrawer(event)">Cart</a>
   </div>
 
 </header>
 <div class="search-bar" id="searchBar">
     <input type="text" id="searchInput" placeholder="Search">
 </div>
+
+<div class="cart-shade" id="cartShade" onclick="closeCartDrawer()"></div>
+<aside class="cart-drawer" id="cartDrawer">
+  <div class="cart-drawer-head">
+    <h2>Shopping Cart</h2>
+    <button class="cart-close" type="button" onclick="closeCartDrawer()" aria-label="Close cart">×</button>
+  </div>
+  <div class="drawer-items" id="drawerItems"></div>
+  <p class="drawer-empty" id="drawerEmpty">Your cart is empty.</p>
+  <div class="drawer-footer">
+    <p class="drawer-note">Tax calculated at checkout.</p>
+    <div class="drawer-total">
+      <span>Total</span>
+      <span id="drawerTotal">$0.00</span>
+    </div>
+    <a href="cart.html" class="drawer-checkout">Checkout</a>
+    <a href="cart.html" class="drawer-cart-link">View Shopping Cart</a>
+  </div>
+</aside>
 
 <section class="hero">
   <h1>PURE CRAFT</h1>
@@ -522,6 +760,104 @@ function changePreview(previewId, imgSrc, text) {
 }
 let isSearchOpen = false;
 
+function getCart() {
+  try {
+    return JSON.parse(localStorage.getItem("cart")) || [];
+  } catch (error) {
+    return [];
+  }
+}
+
+function saveCart(cart) {
+  localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+function formatMoney(value) {
+  return "$" + Number(value || 0).toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  });
+}
+
+function updateCartLink() {
+  const link = document.getElementById("cartLink");
+  if (!link) return;
+
+  const cart = getCart();
+  const count = cart.reduce((sum, item) => sum + Number(item.qty || 0), 0);
+  link.textContent = count ? "Cart (" + count + ")" : "Cart";
+}
+
+function renderCartDrawer() {
+  const cart = getCart().filter(item => Number(item.qty) > 0);
+  const items = document.getElementById("drawerItems");
+  const empty = document.getElementById("drawerEmpty");
+  const totalEl = document.getElementById("drawerTotal");
+
+  const count = cart.reduce((sum, item) => sum + Number(item.qty || 0), 0);
+  updateCartLink();
+
+  if (!cart.length) {
+    items.innerHTML = "";
+    empty.style.display = "block";
+    totalEl.textContent = formatMoney(0);
+    return;
+  }
+
+  empty.style.display = "none";
+  items.innerHTML = cart.map((item, index) => `
+    <article class="drawer-item">
+      <img src="${item.image || "images/logo.png"}" alt="${item.name || "Product"}">
+      <div class="drawer-info">
+        <div>
+          <p class="drawer-name">${item.name || "Product"}</p>
+          <p class="drawer-price">${formatMoney(item.price)}</p>
+          <p class="drawer-meta">Color: ${item.color || "Black"}</p>
+          <div class="drawer-qty">
+            <button type="button" onclick="changeDrawerQty(${index}, -1)">−</button>
+            <span>${Number(item.qty || 1)}</span>
+            <button type="button" onclick="changeDrawerQty(${index}, 1)">+</button>
+          </div>
+        </div>
+        <button class="drawer-remove" type="button" onclick="removeDrawerItem(${index})">Remove</button>
+      </div>
+    </article>
+  `).join("");
+
+  const total = cart.reduce((sum, item) => {
+    return sum + Number(item.price || 0) * Number(item.qty || 0);
+  }, 0);
+  totalEl.textContent = formatMoney(total);
+  saveCart(cart);
+}
+
+function openCartDrawer(event) {
+  if (event) event.preventDefault();
+  renderCartDrawer();
+  document.getElementById("cartShade").classList.add("active");
+  document.getElementById("cartDrawer").classList.add("active");
+}
+
+function closeCartDrawer() {
+  document.getElementById("cartShade").classList.remove("active");
+  document.getElementById("cartDrawer").classList.remove("active");
+}
+
+function changeDrawerQty(index, amount) {
+  const cart = getCart();
+  if (!cart[index]) return;
+  cart[index].qty = Math.max(0, Number(cart[index].qty || 1) + amount);
+  saveCart(cart.filter(item => Number(item.qty) > 0));
+  renderCartDrawer();
+}
+
+function removeDrawerItem(index) {
+  const cart = getCart();
+  cart.splice(index, 1);
+  saveCart(cart);
+  renderCartDrawer();
+}
+
 function toggleSearch(e) {
   e.preventDefault();
   document.addEventListener("keydown", function(e) {
@@ -544,6 +880,8 @@ function toggleSearch(e) {
     bar.classList.remove("active");
   }
 }
+
+renderCartDrawer();
 </script>
 
 </body>

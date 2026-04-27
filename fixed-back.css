@@ -1,0 +1,41 @@
+.fixed-back {
+  position: fixed;
+  top: 88px;
+  left: 32px;
+  bottom: auto;
+  z-index: 2000;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 26px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  backdrop-filter: blur(10px);
+  color: #111;
+  cursor: pointer;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1;
+  text-decoration: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.fixed-back:hover {
+  opacity: 0.68;
+  transform: translateX(-2px);
+}
+
+.fixed-back span:first-child {
+  font-size: 18px;
+  line-height: 1;
+}
+
+@media (max-width: 760px) {
+  .fixed-back {
+    top: 74px;
+    left: 18px;
+    min-height: 26px;
+    font-size: 12px;
+  }
+}

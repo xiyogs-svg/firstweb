@@ -2,198 +2,63 @@
 <html lang="zh">
 <head>
 <meta charset="UTF-8">
-<title>Collection</title>
-
-<style>
-body {
-  margin: 0;
-  font-family: Helvetica, Arial, sans-serif;
-  color: #111;
-  background: #fff;
-}
-
-/* ===== 顶部导航 ===== */
-.site-header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  padding: 24px 40px;
-  z-index: 100;
-  background: rgba(255,255,255,0.95);
-}
-
-.nav-left, .nav-right {
-  display: flex;
-  gap: 28px;
-}
-
-.nav-right {
-  justify-content: flex-end;
-}
-
-.site-header a {
-  text-decoration: none;
-  color: #111;
-  font-size: 14px;
-}
-
-.logo {
-  font-size: 28px;
-  letter-spacing: 2px;
-}
-
-/* ===== 主体 ===== */
-.wrapper {
-  padding-top: 100px;
-}
-
-/* 标题 */
-.title {
-  text-align: center;
-  margin: 120px 0 80px;
-}
-
-.title h1 {
-  font-size: 36px;
-  letter-spacing: 1px;
-  margin: 0;
-}
-
-/* 图片块 */
-.block {
-  margin-bottom: 80px;
-}
-
-.block img {
-  width: 60%;
-  height: auto;
-  display: block;
-  margin: 0 auto;
-}
-
-/* 文字 */
-.text {
-  max-width: 600px;
-  margin: 100px auto;
-  text-align: center;
-  font-size: 14px;
-  line-height: 1.8;
-  color: #444;
-}
-
-/* 按钮 */
-.cta {
-  text-align: center;
-  margin: 100px 0 140px;
-}
-
-.btn {
-  display: inline-block;
-  padding: 14px 30px;
-  border: 1px solid black;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-.btn:hover {
-  background: black;
-  color: white;
-}
-
-/* 返回 */
-.back {
-  position: fixed;
-  top: 100px;
-  left: 40px;
-  font-size: 13px;
-  text-decoration: none;
-  color: #111;
-}
-</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KILIAN SKIRT | PURE CRAFT</title>
+<link rel="icon" href="images/logo.png">
+<link rel="stylesheet" href="fixed-back.css">
+<link rel="stylesheet" href="product.css">
 </head>
-
 <body>
-
+<div class="promo">Complimentary shipping on all orders worldwide.</div>
 <header class="site-header">
-  <div class="nav-left">
-    <a href="#">Featured</a>
-    <a href="#">Shop</a>
-    <a href="#">Collections</a>
-  </div>
-
-  <div class="nav-center">
-    <a href="index.html" class="logo">PURE CRAFT</a>
-  </div>
-
-  <div class="nav-right">
-    <a href="#">Search</a>
-    <a href="cart.html">Cart</a>
-  </div>
+  <nav class="nav-left">
+    <a href="index.html">Featured</a>
+    <a href="kiro.html">Shop</a>
+    <a href="aiden.html">Leather Goods</a>
+    <a href="kiro.html">Collections</a>
+  </nav>
+  <a href="index.html" class="logo">PURE CRAFT</a>
+  <nav class="nav-right">
+    <a href="search.html">Search</a>
+    <a href="#">Stores</a>
+    <a href="#">Account</a>
+    <a href="cart.html" id="cartLink">Cart</a>
+  </nav>
 </header>
-
-<a href="javascript:history.back()" class="back">← Back</a>
-
-<div class="wrapper">
-
-  <!-- 标题 -->
-  <div class="title">
-    <h1>KIRO COLLECTION</h1>
-  </div>
-
-  <!-- 图片流 -->
-  <div class="block">
-    <img src="images/kiro2.1.jpg">
-  </div>
-
-  <div class="block">
-    <img src="images/kiro2.3.png">
-  </div>
-
-  <div class="block">
-    <img src="images/kiro2.2.png">
-  </div>
-
-  <!-- 文字 -->
-  <div class="text">
-    A refined expression of modern craftsmanship.  
-    Designed with structure, balance, and restraint.
-  </div>
-
-  <!-- CTA -->
-  <div class="cta">
-    <div class="btn" onclick="addToCart()">Add to Cart</div>
-  </div>
-
-</div>
-
+<main class="product-page">
+  <section class="product-media">
+    <img src="images/kiro2.3.png" alt="KILIAN SKIRT">
+  </section>
+  <section class="product-info">
+    <div class="title-row">
+      <h1>KILIAN SKIRT</h1>
+      <p class="price">$990</p>
+    </div>
+    <p class="section-label">Ivory</p>
+    <div class="swatch ivory"></div>
+    <p class="section-label">Size&nbsp;&nbsp;XS</p>
+    <div class="size-row"><span class="active">XS</span><span>S</span><span>M</span><span>L</span><span>XL</span></div>
+    <p class="description">An airy skirt with rich texture and a pull-on silhouette. The soft structure is made for fluid movement.</p>
+    <p class="sku">SKU: PC-KIRO-002</p>
+    <button class="add-btn" type="button" onclick="addToCart()">Add To Cart</button>
+    <a href="#" class="store-link">Find in Store</a>
+    <div class="accordion">
+      <button type="button">Size and Fit <span>+</span></button>
+      <button type="button">Material and Care <span>+</span></button>
+      <button type="button">Shipping and Returns <span>+</span></button>
+    </div>
+  </section>
+</main>
 <script>
-function addToCart() {
-  const product = {
-    id: "vintage-necklace",
-    name: "Vintage Necklace",
-    price: 299,
-    image: "images/kiro.jpg",
-    qty: 1
-  };
-
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-
-  const existing = cart.find(i => i.id === product.id);
-
-  if (existing) {
-    existing.qty += 1;
-  } else {
-    cart.push(product);
-  }
-
-  localStorage.setItem("cart", JSON.stringify(cart));
-
-  window.location.href = "cart.html";
-}
+const product = {
+  id: "kilian-skirt",
+  name: "KILIAN SKIRT",
+  price: 990,
+  color: "Ivory",
+  image: "images/kiro2.3.png"
+};
 </script>
-
+<script src="product-page.js"></script>
+<script src="fixed-back.js"></script>
 </body>
 </html>

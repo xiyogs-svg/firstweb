@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Product Detail</title>
+<link rel="stylesheet" href="fixed-back.css">
 
 <style>
 body {
@@ -52,26 +53,6 @@ body.page-leave {
 .logo {
   font-size: 28px;
   letter-spacing: 2px;
-}
-
-/* 返回按钮 */
-.back-btn {
-  position: fixed;
-  top: 90px;
-  left: 40px;
-  z-index: 20;
-  text-decoration: none;
-  color: #111;
-  font-size: 13px;
-  letter-spacing: 0.4px;
-  background: rgba(255,255,255,0.9);
-  padding: 8px 12px;
-  border: 1px solid rgba(0,0,0,0.08);
-  transition: 0.25s ease;
-}
-
-.back-btn:hover {
-  opacity: 0.6;
 }
 
 /* 主体 */
@@ -177,8 +158,6 @@ body.page-leave {
     <a href="cart.html" class="page-link">Cart</a>
   </div>
 </header>
-
-<a href="index.html" class="back-btn page-link">← Back</a>
 
 <div class="container">
   <div class="gallery">
@@ -355,6 +334,7 @@ function openViewer() {
   document.body.appendChild(overlay);
 }
 </script>
+<script src="fixed-back.js"></script>
 
 </body>
 </html>

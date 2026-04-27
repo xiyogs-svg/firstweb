@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Search</title>
+<link rel="stylesheet" href="fixed-back.css">
 
 <style>
 body {
@@ -25,10 +26,22 @@ h1 {
 }
 
 /* 卡片 */
+.card {
+  display: block;
+  color: #111;
+  text-decoration: none;
+}
+
 .card img {
   width: 100%;
   height: 320px;
   object-fit: cover;
+  display: block;
+  transition: opacity 0.2s ease;
+}
+
+.card:hover img {
+  opacity: 0.82;
 }
 
 .card p {
@@ -47,12 +60,10 @@ h1 {
 <script>
 /* 商品数据（你可以自己扩展） */
 const products = [
-  { name: "KIRO Necklace", img: "images/kiro1.jpg" },
-  { name: "KIRO Ring", img: "images/kiro2.jpg" },
-  { name: "Aiden Bag", img: "images/aiden.jpg" },
-  { name: "Spring Dress", img: "images/pic3.jpg" },
-  { name: "Leather Bag", img: "images/pic4.jpg" },
-  { name: "Minimal Earrings", img: "images/pic5.jpg" }
+  { name: "TEVIS TOP", img: "images/kiro1.jpg", url: "kiro1.html" },
+  { name: "KILIAN SKIRT", img: "images/kiro2.3.png", url: "kiro2.html" },
+  { name: "BLAKE CLUTCH", img: "images/case21.png", url: "kiro3.html" },
+  { name: "MILLY PUMP", img: "images/kiro5.11.png", url: "kiro4.html" }
 ];
 
 /* 获取关键词 */
@@ -76,14 +87,15 @@ if (filtered.length === 0) {
 } else {
   filtered.forEach(p => {
     container.innerHTML += `
-      <div class="card">
+      <a class="card" href="${p.url}">
         <img src="${p.img}">
         <p>${p.name}</p>
-      </div>
+      </a>
     `;
   });
 }
 </script>
+<script src="fixed-back.js"></script>
 
 </body>
 </html>
