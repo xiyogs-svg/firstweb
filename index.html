@@ -64,7 +64,9 @@ body {
 .site-header a {
   text-decoration: none;
   color: #111;
+  font-family: Georgia, "Times New Roman", serif;
   font-size: 14px;
+  letter-spacing: 0.2px;
   transition: opacity 0.2s ease;
 }
 
@@ -170,24 +172,193 @@ body {
 
 /* Banner */
 .hero {
-  height: 80vh;
-  background: url('images/banner333.JPG') center/cover;
+  margin-top: 96px;
+  min-height: calc((100vw / 2) - 70px);
+  background: #fff url('images/banner333.JPG') center -70px / 100% auto no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  padding-top: 140px; 
+  box-sizing: border-box;
 }
 
-.hero h1 {
+.hero-mark {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: rgba(0,0,0,0.6);
-  font-size: 56px;
-  letter-spacing: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+  color: rgba(0,0,0,0.58);
   margin: 0;
+  text-align: center;
+  pointer-events: none;
+}
+
+.hero-mark h1 {
+  margin: 0;
+  color: inherit;
+  font-size: 58px;
+  font-weight: 500;
+  letter-spacing: 18px;
+  line-height: 1;
+}
+
+.orb {
+  position: relative;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 27% 18%, rgba(255,255,255,1) 0 8%, rgba(255,255,255,0.64) 16%, transparent 29%),
+    radial-gradient(circle at 74% 78%, rgba(92,78,58,0.56) 0 16%, transparent 43%),
+    radial-gradient(circle at 36% 34%, #fffdf1 0 10%, #efe0b4 30%, #c5d2cf 52%, #93aaad 70%, #5f6259 100%);
+  box-shadow:
+    0 24px 18px -16px rgba(77,86,82,0.34),
+    0 8px 18px rgba(78,76,66,0.2),
+    inset -12px -14px 19px rgba(72,75,66,0.34),
+    inset 9px 8px 14px rgba(255,255,255,0.94),
+    inset 2px 2px 3px rgba(255,255,255,0.82),
+    inset 0 0 0 1px rgba(255,255,255,0.28);
+  overflow: hidden;
+  transform-style: preserve-3d;
+  animation: orbBounce 3.2s cubic-bezier(0.45, 0, 0.22, 1) infinite;
+}
+
+.orb::before {
+  content: "";
+  position: absolute;
+  inset: -28%;
+  background: linear-gradient(115deg, transparent 22%, rgba(255,255,255,0.86) 45%, transparent 62%);
+  transform: translateX(-70%) rotate(16deg);
+  filter: blur(1px);
+  animation: orbGlint 5.8s ease-in-out infinite;
+}
+
+.orb::after {
+  content: "";
+  position: absolute;
+  inset: 7px 11px 22px 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.24);
+  filter: blur(4px);
+  animation: orbLiquid 6.2s ease-in-out infinite;
+}
+
+.orb-shadow {
+  width: 42px;
+  height: 8px;
+  margin-top: -15px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(83,91,87,0.22) 0%, rgba(83,91,87,0.07) 46%, transparent 72%);
+  filter: blur(3px);
+  animation: orbShadow 3.2s cubic-bezier(0.45, 0, 0.22, 1) infinite;
+}
+
+.hero-tagline {
+  margin: 0;
+  color: inherit;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  letter-spacing: 1.2px;
+}
+
+@keyframes orbBounce {
+  0%, 100% {
+    transform: translateY(0) scale(1) rotateX(0deg) rotateY(0deg);
+    box-shadow:
+      0 24px 18px -16px rgba(77,86,82,0.34),
+      0 8px 18px rgba(78,76,66,0.2),
+      inset -12px -14px 19px rgba(72,75,66,0.34),
+      inset 9px 8px 14px rgba(255,255,255,0.94),
+      inset 2px 2px 3px rgba(255,255,255,0.82),
+      inset 0 0 0 1px rgba(255,255,255,0.28);
+  }
+
+  50% {
+    transform: translateY(-30px) scale(1.06) rotateX(13deg) rotateY(-16deg);
+    box-shadow:
+      0 48px 24px -24px rgba(77,86,82,0.22),
+      0 16px 24px rgba(78,76,66,0.16),
+      inset -14px -15px 21px rgba(72,75,66,0.27),
+      inset 10px 9px 16px rgba(255,255,255,0.98),
+      inset 2px 2px 3px rgba(255,255,255,0.84),
+      inset 0 0 0 1px rgba(255,255,255,0.3);
+  }
+}
+
+@keyframes orbShadow {
+  0%, 100% {
+    transform: scaleX(1);
+    opacity: 0.9;
+  }
+
+  50% {
+    transform: scaleX(0.62);
+    opacity: 0.34;
+  }
+}
+
+@keyframes orbGlint {
+  0%, 20% {
+    transform: translateX(-80%) rotate(16deg);
+    opacity: 0;
+  }
+
+  42% {
+    opacity: 0.86;
+  }
+
+  68%, 100% {
+    transform: translateX(80%) rotate(16deg);
+    opacity: 0;
+  }
+}
+
+@keyframes orbLiquid {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: translate(5px, 3px) scale(1.18);
+    opacity: 0.38;
+  }
+}
+
+@media (max-width: 760px) {
+  .hero {
+    margin-top: 118px;
+    min-height: calc((100vw / 2) - 24px);
+    background-position: center -24px;
+  }
+
+  .hero-mark {
+    gap: 16px;
+  }
+
+  .hero-mark h1 {
+    font-size: 34px;
+    letter-spacing: 10px;
+  }
+
+  .orb {
+    width: 26px;
+    height: 26px;
+  }
+
+  .orb-shadow {
+    width: 32px;
+    margin-top: -12px;
+  }
+
+  .hero-tagline {
+    font-size: 13px;
+    letter-spacing: 0.7px;
+  }
 }
 
 /* 项目列表 */
@@ -251,17 +422,22 @@ body {
   text-align: center;
   max-width: 700px;
   margin: auto;
+  font-family: Georgia, "Times New Roman", serif;
+  color: rgba(0,0,0,0.58);
 }
 
 .section h2 {
   margin-top: 0;
+  font-weight: 400;
 }
 
 /* footer */
 .footer {
   padding: 60px;
   border-top: 1px solid #eee;
+  font-family: Georgia, "Times New Roman", serif;
   font-size: 14px;
+  color: rgba(0,0,0,0.58);
 }
 /* 搜索按钮 */
 .search-btn {
@@ -688,7 +864,12 @@ body {
 </aside>
 
 <section class="hero">
-  <h1>PURE CRAFT</h1>
+  <div class="hero-mark">
+    <h1>M O S</h1>
+    <div class="orb" aria-hidden="true"></div>
+    <div class="orb-shadow" aria-hidden="true"></div>
+    <p class="hero-tagline">Mass · Order · Surge</p>
+  </div>
 </section>
 
 <section class="grid">
