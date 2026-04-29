@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Search</title>
+<link rel="stylesheet" href="mos-orb.css">
 <link rel="stylesheet" href="fixed-back.css">
 
 <style>
@@ -48,6 +49,13 @@ h1 {
   margin-top: 10px;
   font-size: 14px;
 }
+
+.grid .mos-empty-mark {
+  grid-column: 1 / -1;
+  padding: 80px 0;
+  color: rgba(0,0,0,0.58);
+  font-family: Georgia, "Times New Roman", serif;
+}
 </style>
 </head>
 
@@ -83,7 +91,13 @@ const filtered = products.filter(p =>
 const container = document.getElementById("results");
 
 if (filtered.length === 0) {
-  container.innerHTML = "<p>No results found.</p>";
+  container.innerHTML = `
+    <div class="mos-empty-mark">
+      <div class="mos-orb"></div>
+      <div class="mos-orb-shadow"></div>
+      <p>No results found.</p>
+    </div>
+  `;
 } else {
   filtered.forEach(p => {
     container.innerHTML += `
@@ -96,6 +110,7 @@ if (filtered.length === 0) {
 }
 </script>
 <script src="fixed-back.js"></script>
+<script src="mos-orb.js"></script>
 
 </body>
 </html>

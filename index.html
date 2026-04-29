@@ -2,8 +2,9 @@
 <html lang="zh">
 <head>
 <meta charset="UTF-8">
-<title>PURE CRAFT</title>
+<title>MOS</title>
 <link rel="icon" href="images/logo.png">
+<link rel="stylesheet" href="mos-orb.css">
 
 <style>
 body {
@@ -81,11 +82,13 @@ body {
   align-items: center;
 }
 
-.logo {
-  font-size: 34px;
-  letter-spacing: 2px;
+.site-header .logo {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 38px;
+  line-height: 1;
+  letter-spacing: 1.2px;
   display: inline-block;
-  font-weight: 500;
+  font-weight: 700;
   color: #111;
 }
 
@@ -172,9 +175,10 @@ body {
 
 /* Banner */
 .hero {
-  margin-top: 96px;
-  min-height: calc((100vw / 2) - 70px);
-  background: #fff url('images/banner333.JPG') center -70px / 100% auto no-repeat;
+  margin-top: 118px;
+  min-height: calc(100vh - 118px);
+  height: calc(100vh - 118px);
+  background: #fff url('images/banner333.JPG') center -28px / 100% auto no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -191,7 +195,7 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 28px;
-  color: rgba(0,0,0,0.58);
+  color: rgba(0,0,0,0.68);
   margin: 0;
   text-align: center;
   pointer-events: none;
@@ -208,6 +212,7 @@ body {
 
 .orb {
   position: relative;
+  top: 12px;
   width: 34px;
   height: 34px;
   border-radius: 50%;
@@ -250,7 +255,7 @@ body {
 .orb-shadow {
   width: 42px;
   height: 8px;
-  margin-top: -15px;
+  margin-top: -3px;
   border-radius: 50%;
   background: radial-gradient(ellipse, rgba(83,91,87,0.22) 0%, rgba(83,91,87,0.07) 46%, transparent 72%);
   filter: blur(3px);
@@ -330,10 +335,16 @@ body {
 }
 
 @media (max-width: 760px) {
+  .site-header .logo {
+    font-size: 30px;
+    letter-spacing: 1px;
+  }
+
   .hero {
-    margin-top: 118px;
-    min-height: calc((100vw / 2) - 24px);
-    background-position: center -24px;
+    margin-top: 130px;
+    min-height: calc(100vh - 130px);
+    height: calc(100vh - 130px);
+    background-position: center -12px;
   }
 
   .hero-mark {
@@ -346,13 +357,14 @@ body {
   }
 
   .orb {
+    top: 8px;
     width: 26px;
     height: 26px;
   }
 
   .orb-shadow {
     width: 32px;
-    margin-top: -12px;
+    margin-top: -4px;
   }
 
   .hero-tagline {
@@ -423,7 +435,7 @@ body {
   max-width: 700px;
   margin: auto;
   font-family: Georgia, "Times New Roman", serif;
-  color: rgba(0,0,0,0.58);
+  color: rgba(0,0,0,0.68);
 }
 
 .section h2 {
@@ -437,7 +449,7 @@ body {
   border-top: 1px solid #eee;
   font-family: Georgia, "Times New Roman", serif;
   font-size: 14px;
-  color: rgba(0,0,0,0.58);
+  color: rgba(0,0,0,0.68);
 }
 /* 搜索按钮 */
 .search-btn {
@@ -824,7 +836,7 @@ body {
   </div>
 
   <div class="nav-center">
-    <a href="index.html" class="logo">PURE CRAFT</a>
+    <a href="index.html" class="logo">MOS</a>
   </div>
 
   <div class="nav-right">
@@ -913,8 +925,8 @@ body {
 <section class="section">
   <h2>About</h2>
   <p>
-    A curated portfolio of brand strategy, content creation, and growth marketing.
-    Focused on delivering measurable impact through creative storytelling.
+    Mass · Order · Surge<br>
+    Everything begins with Mass. Raw, heavy, undefined.It is shaped into Order. Structured, controlled, refined.And eventually, it moves. A Surge that shifts everything out of place.
   </p>
 </section>
 
@@ -1046,6 +1058,7 @@ function toggleSearch(e) {
     const value = document.getElementById("searchInput").value;
 
     if (value) {
+      if (window.showMosLoading) showMosLoading();
       window.location.href = "search.html?q=" + encodeURIComponent(value);
     }
   }
@@ -1064,6 +1077,7 @@ function toggleSearch(e) {
 
 renderCartDrawer();
 </script>
+<script src="mos-orb.js"></script>
 
 </body>
 </html>

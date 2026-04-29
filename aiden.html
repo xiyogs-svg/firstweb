@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>KIRO COLLECTION</title>
+<link rel="stylesheet" href="mos-orb.css">
 <link rel="stylesheet" href="fixed-back.css">
 
 <!-- 字体（接近KHAITE） -->
@@ -41,11 +42,14 @@ body {
 }
 
 /* logo */
-.logo {
-  font-size: 34px;
-  letter-spacing: 2px;
+.site-header .logo {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 38px;
+  line-height: 1;
+  letter-spacing: 1.2px;
   text-decoration: none;
   color: #111;
+  font-weight: 700;
 }
 
 /* link */
@@ -141,6 +145,13 @@ body {
 .price {
   color: #666;
 }
+
+@media (max-width: 760px) {
+  .site-header .logo {
+    font-size: 30px;
+    letter-spacing: 1px;
+  }
+}
 </style>
 </head>
 
@@ -156,7 +167,7 @@ body {
   </div>
 
   <div class="nav-center">
-    <a href="index.html" class="logo">PURE CRAFT</a>
+    <a href="index.html" class="logo">MOS</a>
   </div>
 
   <div class="nav-right">
@@ -272,5 +283,6 @@ body {
 </section>
 
 <script src="fixed-back.js"></script>
+<script src="mos-orb.js"></script>
 </body>
 </html>

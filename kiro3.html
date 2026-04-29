@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BLAKE CLUTCH | PURE CRAFT</title>
+<title>BLAKE CLUTCH | MOS</title>
 <link rel="icon" href="images/logo.png">
+<link rel="stylesheet" href="mos-orb.css">
 <link rel="stylesheet" href="fixed-back.css">
 <link rel="stylesheet" href="product.css">
 </head>
@@ -17,7 +18,7 @@
     <a href="aiden.html">Leather Goods</a>
     <a href="kiro.html">Collections</a>
   </nav>
-  <a href="index.html" class="logo">PURE CRAFT</a>
+  <a href="index.html" class="logo">MOS</a>
   <nav class="nav-right">
     <a href="search.html">Search</a>
     <a href="#">Stores</a>
@@ -27,15 +28,28 @@
 </header>
 <main class="product-page">
   <section class="product-media">
-    <img src="images/case21.png" alt="BLAKE CLUTCH">
+    <div class="product-thumbs" aria-label="Product images">
+      <button class="product-thumb active" type="button" data-image="images/case21.png"><img src="images/case21.png" alt=""></button>
+      <button class="product-thumb" type="button" data-image="images/case22.png"><img src="images/case22.png" alt=""></button>
+      <button class="product-thumb" type="button" data-image="images/case23.png"><img src="images/case23.png" alt=""></button>
+      <button class="product-thumb" type="button" data-image="images/kiro3.jpg"><img src="images/kiro3.jpg" alt=""></button>
+    </div>
+    <div class="product-main">
+      <img id="productMainImg" src="images/case21.png" alt="BLAKE CLUTCH">
+    </div>
   </section>
   <section class="product-info">
     <div class="title-row">
       <h1>BLAKE CLUTCH</h1>
       <p class="price">$3,200</p>
     </div>
-    <p class="section-label">Black</p>
-    <div class="swatch black"></div>
+    <p class="section-label">Color&nbsp;&nbsp;<span id="selectedColor">Black</span></p>
+    <div class="color-row" aria-label="Select color">
+      <button class="swatch silver" type="button" data-color="Silver" aria-label="Silver"></button>
+      <button class="swatch black active" type="button" data-color="Black" aria-label="Black"></button>
+      <button class="swatch gold" type="button" data-color="Gold" aria-label="Gold"></button>
+      <button class="swatch copper" type="button" data-color="Copper" aria-label="Copper"></button>
+    </div>
     <p class="description">A compact clutch with a structured profile and polished finish. Built to hold essentials without losing its clean shape.</p>
     <p class="sku">SKU: PC-KIRO-003</p>
     <button class="add-btn" type="button" onclick="addToCart()">Add To Cart</button>
@@ -58,5 +72,6 @@ const product = {
 </script>
 <script src="product-page.js"></script>
 <script src="fixed-back.js"></script>
+<script src="mos-orb.js"></script>
 </body>
 </html>

@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KILIAN SKIRT | PURE CRAFT</title>
+<title>KILIAN SKIRT | MOS</title>
 <link rel="icon" href="images/logo.png">
+<link rel="stylesheet" href="mos-orb.css">
 <link rel="stylesheet" href="fixed-back.css">
 <link rel="stylesheet" href="product.css">
 </head>
@@ -17,7 +18,7 @@
     <a href="aiden.html">Leather Goods</a>
     <a href="kiro.html">Collections</a>
   </nav>
-  <a href="index.html" class="logo">PURE CRAFT</a>
+  <a href="index.html" class="logo">MOS</a>
   <nav class="nav-right">
     <a href="search.html">Search</a>
     <a href="#">Stores</a>
@@ -27,15 +28,28 @@
 </header>
 <main class="product-page">
   <section class="product-media">
-    <img src="images/kiro2.3.png" alt="KILIAN SKIRT">
+    <div class="product-thumbs" aria-label="Product images">
+      <button class="product-thumb active" type="button" data-image="images/kiro2.3.png"><img src="images/kiro2.3.png" alt=""></button>
+      <button class="product-thumb" type="button" data-image="images/kiro2.1.jpg"><img src="images/kiro2.1.jpg" alt=""></button>
+      <button class="product-thumb" type="button" data-image="images/kiro2.2.png"><img src="images/kiro2.2.png" alt=""></button>
+      <button class="product-thumb" type="button" data-image="images/kiro2.jpg"><img src="images/kiro2.jpg" alt=""></button>
+    </div>
+    <div class="product-main">
+      <img id="productMainImg" src="images/kiro2.3.png" alt="KILIAN SKIRT">
+    </div>
   </section>
   <section class="product-info">
     <div class="title-row">
       <h1>KILIAN SKIRT</h1>
       <p class="price">$990</p>
     </div>
-    <p class="section-label">Ivory</p>
-    <div class="swatch ivory"></div>
+    <p class="section-label">Color&nbsp;&nbsp;<span id="selectedColor">Gold</span></p>
+    <div class="color-row" aria-label="Select color">
+      <button class="swatch silver" type="button" data-color="Silver" aria-label="Silver"></button>
+      <button class="swatch black" type="button" data-color="Black" aria-label="Black"></button>
+      <button class="swatch gold active" type="button" data-color="Gold" aria-label="Gold"></button>
+      <button class="swatch copper" type="button" data-color="Copper" aria-label="Copper"></button>
+    </div>
     <p class="section-label">Size&nbsp;&nbsp;XS</p>
     <div class="size-row"><span class="active">XS</span><span>S</span><span>M</span><span>L</span><span>XL</span></div>
     <p class="description">An airy skirt with rich texture and a pull-on silhouette. The soft structure is made for fluid movement.</p>
@@ -54,11 +68,12 @@ const product = {
   id: "kilian-skirt",
   name: "KILIAN SKIRT",
   price: 990,
-  color: "Ivory",
+  color: "Gold",
   image: "images/kiro2.3.png"
 };
 </script>
 <script src="product-page.js"></script>
 <script src="fixed-back.js"></script>
+<script src="mos-orb.js"></script>
 </body>
 </html>

@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cart | PURE CRAFT</title>
+<title>Cart | MOS</title>
 <link rel="icon" href="images/logo.png">
+<link rel="stylesheet" href="mos-orb.css">
 <link rel="stylesheet" href="fixed-back.css">
 
 <style>
@@ -53,10 +54,13 @@ body {
   opacity: 0.55;
 }
 
-.logo {
-  font-size: 28px;
-  letter-spacing: 2px;
-  font-weight: 500;
+.site-header .logo {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 38px;
+  line-height: 1;
+  letter-spacing: 1.2px;
+  font-weight: 700;
+  color: #111;
 }
 
 .page {
@@ -302,6 +306,11 @@ body {
     text-align: center;
   }
 
+  .site-header .logo {
+    font-size: 30px;
+    letter-spacing: 1px;
+  }
+
   .page {
     padding: 56px 22px 60px;
   }
@@ -352,7 +361,7 @@ body {
   </div>
 
   <div class="nav-center">
-    <a href="index.html" class="logo">PURE CRAFT</a>
+    <a href="index.html" class="logo">MOS</a>
   </div>
 
   <div class="nav-right">
@@ -395,6 +404,10 @@ body {
   </section>
 
   <section class="empty" id="emptyState">
+    <div class="mos-empty-mark" aria-hidden="true">
+      <div class="mos-orb"></div>
+      <div class="mos-orb-shadow"></div>
+    </div>
     <h2>Your cart is empty</h2>
     <p>Discover pieces from the latest collection.</p>
     <a href="kiro.html">Shop Collection</a>
@@ -453,7 +466,7 @@ function renderCart() {
         <img src="${item.image || "images/logo.png"}" alt="${item.name || "Product"}">
         <div class="item-info">
           <h2 class="item-title">${item.name || "Product"}</h2>
-          <p class="item-meta">PURE CRAFT<br>${formatPrice(price)}</p>
+          <p class="item-meta">MOS<br>${formatPrice(price)}</p>
           <div class="qty-control" aria-label="Quantity">
             <button type="button" onclick="changeQty(${index}, -1)" aria-label="Decrease quantity">-</button>
             <span>${qty}</span>
@@ -504,5 +517,6 @@ function checkout() {
 renderCart();
 </script>
 <script src="fixed-back.js"></script>
+<script src="mos-orb.js"></script>
 </body>
 </html>

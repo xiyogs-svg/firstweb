@@ -3,8 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MILLY PUMP | PURE CRAFT</title>
+<title>MILLY PUMP | MOS</title>
 <link rel="icon" href="images/logo.png">
+<link rel="stylesheet" href="mos-orb.css">
 <link rel="stylesheet" href="fixed-back.css">
 <link rel="stylesheet" href="product.css">
 </head>
@@ -17,7 +18,7 @@
     <a href="aiden.html">Leather Goods</a>
     <a href="kiro.html">Collections</a>
   </nav>
-  <a href="index.html" class="logo">PURE CRAFT</a>
+  <a href="index.html" class="logo">MOS</a>
   <nav class="nav-right">
     <a href="search.html">Search</a>
     <a href="#">Stores</a>
@@ -27,15 +28,28 @@
 </header>
 <main class="product-page">
   <section class="product-media">
-    <img src="images/kiro5.11.png" alt="MILLY PUMP">
+    <div class="product-thumbs" aria-label="Product images">
+      <button class="product-thumb active" type="button" data-image="images/kiro5.11.png"><img src="images/kiro5.11.png" alt=""></button>
+      <button class="product-thumb" type="button" data-image="images/kiro5.1.jpg"><img src="images/kiro5.1.jpg" alt=""></button>
+      <button class="product-thumb" type="button" data-image="images/kiro51.jpg"><img src="images/kiro51.jpg" alt=""></button>
+      <button class="product-thumb" type="button" data-image="images/kiro4.jpg"><img src="images/kiro4.jpg" alt=""></button>
+    </div>
+    <div class="product-main">
+      <img id="productMainImg" src="images/kiro5.11.png" alt="MILLY PUMP">
+    </div>
   </section>
   <section class="product-info">
     <div class="title-row">
       <h1>MILLY PUMP</h1>
       <p class="price">$1,250</p>
     </div>
-    <p class="section-label">Black</p>
-    <div class="swatch black"></div>
+    <p class="section-label">Color&nbsp;&nbsp;<span id="selectedColor">Copper</span></p>
+    <div class="color-row" aria-label="Select color">
+      <button class="swatch silver" type="button" data-color="Silver" aria-label="Silver"></button>
+      <button class="swatch black" type="button" data-color="Black" aria-label="Black"></button>
+      <button class="swatch gold" type="button" data-color="Gold" aria-label="Gold"></button>
+      <button class="swatch copper active" type="button" data-color="Copper" aria-label="Copper"></button>
+    </div>
     <p class="section-label">Size&nbsp;&nbsp;37</p>
     <div class="size-row"><span>35</span><span>36</span><span class="active">37</span><span>38</span><span>39</span></div>
     <p class="description">A refined pump with a precise silhouette and balanced heel. Designed as a quiet statement piece.</p>
@@ -54,11 +68,12 @@ const product = {
   id: "milly-pump",
   name: "MILLY PUMP",
   price: 1250,
-  color: "Black",
+  color: "Copper",
   image: "images/kiro5.11.png"
 };
 </script>
 <script src="product-page.js"></script>
 <script src="fixed-back.js"></script>
+<script src="mos-orb.js"></script>
 </body>
 </html>

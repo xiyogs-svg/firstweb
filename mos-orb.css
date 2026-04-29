@@ -1,0 +1,176 @@
+.mos-orb {
+  position: relative;
+  top: 12px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 27% 18%, rgba(255,255,255,1) 0 8%, rgba(255,255,255,0.64) 16%, transparent 29%),
+    radial-gradient(circle at 74% 78%, rgba(92,78,58,0.56) 0 16%, transparent 43%),
+    radial-gradient(circle at 36% 34%, #fffdf1 0 10%, #efe0b4 30%, #c5d2cf 52%, #93aaad 70%, #5f6259 100%);
+  box-shadow:
+    0 24px 18px -16px rgba(77,86,82,0.34),
+    0 8px 18px rgba(78,76,66,0.2),
+    inset -12px -14px 19px rgba(72,75,66,0.34),
+    inset 9px 8px 14px rgba(255,255,255,0.94),
+    inset 2px 2px 3px rgba(255,255,255,0.82),
+    inset 0 0 0 1px rgba(255,255,255,0.28);
+  overflow: hidden;
+  transform-style: preserve-3d;
+  animation: mosOrbBounce 3.2s cubic-bezier(0.45, 0, 0.22, 1) infinite;
+}
+
+.mos-orb::before {
+  content: "";
+  position: absolute;
+  inset: -28%;
+  background: linear-gradient(115deg, transparent 22%, rgba(255,255,255,0.86) 45%, transparent 62%);
+  transform: translateX(-70%) rotate(16deg);
+  filter: blur(1px);
+  animation: mosOrbGlint 5.8s ease-in-out infinite;
+}
+
+.mos-orb::after {
+  content: "";
+  position: absolute;
+  inset: 7px 11px 22px 10px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.24);
+  filter: blur(4px);
+  animation: mosOrbLiquid 6.2s ease-in-out infinite;
+}
+
+.mos-orb-shadow {
+  width: 42px;
+  height: 8px;
+  margin-top: -3px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(83,91,87,0.22) 0%, rgba(83,91,87,0.07) 46%, transparent 72%);
+  filter: blur(3px);
+  animation: mosOrbShadow 3.2s cubic-bezier(0.45, 0, 0.22, 1) infinite;
+}
+
+.mos-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  display: grid;
+  place-items: center;
+  background: rgba(255,255,255,0.72);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+}
+
+.mos-loader.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mos-loader-inner,
+.mos-empty-mark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.mos-loader-word {
+  margin: 0;
+  color: rgba(0,0,0,0.58);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 13px;
+  letter-spacing: 3px;
+}
+
+.mos-empty-mark {
+  margin-bottom: 22px;
+}
+
+.mos-empty-mark .mos-orb {
+  width: 28px;
+  height: 28px;
+}
+
+.mos-empty-mark .mos-orb-shadow {
+  width: 34px;
+  height: 7px;
+  margin-top: -13px;
+}
+
+@keyframes mosOrbBounce {
+  0%, 100% {
+    transform: translateY(0) scale(1) rotateX(0deg) rotateY(0deg);
+    box-shadow:
+      0 24px 18px -16px rgba(77,86,82,0.34),
+      0 8px 18px rgba(78,76,66,0.2),
+      inset -12px -14px 19px rgba(72,75,66,0.34),
+      inset 9px 8px 14px rgba(255,255,255,0.94),
+      inset 2px 2px 3px rgba(255,255,255,0.82),
+      inset 0 0 0 1px rgba(255,255,255,0.28);
+  }
+
+  50% {
+    transform: translateY(-30px) scale(1.06) rotateX(13deg) rotateY(-16deg);
+    box-shadow:
+      0 48px 24px -24px rgba(77,86,82,0.22),
+      0 16px 24px rgba(78,76,66,0.16),
+      inset -14px -15px 21px rgba(72,75,66,0.27),
+      inset 10px 9px 16px rgba(255,255,255,0.98),
+      inset 2px 2px 3px rgba(255,255,255,0.84),
+      inset 0 0 0 1px rgba(255,255,255,0.3);
+  }
+}
+
+@keyframes mosOrbShadow {
+  0%, 100% {
+    transform: scaleX(1);
+    opacity: 0.9;
+  }
+
+  50% {
+    transform: scaleX(0.62);
+    opacity: 0.34;
+  }
+}
+
+@keyframes mosOrbGlint {
+  0%, 20% {
+    transform: translateX(-80%) rotate(16deg);
+    opacity: 0;
+  }
+
+  42% {
+    opacity: 0.86;
+  }
+
+  68%, 100% {
+    transform: translateX(80%) rotate(16deg);
+    opacity: 0;
+  }
+}
+
+@keyframes mosOrbLiquid {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.6;
+  }
+
+  50% {
+    transform: translate(5px, 3px) scale(1.18);
+    opacity: 0.38;
+  }
+}
+
+@media (max-width: 760px) {
+  .mos-orb {
+    top: 8px;
+    width: 26px;
+    height: 26px;
+  }
+
+  .mos-orb-shadow {
+    width: 32px;
+    margin-top: -4px;
+  }
+}
