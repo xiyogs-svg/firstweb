@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Account | MOS</title>
+<link rel="icon" href="images/logo.png">
+<link rel="stylesheet" href="mos-orb.css">
+<link rel="stylesheet" href="fixed-back.css">
+<link rel="stylesheet" href="account.css">
+</head>
+<body>
+<header class="site-header">
+  <nav class="nav-left">
+    <a href="index.html">Featured</a>
+    <a href="kiro.html">Shop</a>
+    <a href="aiden.html">Leather Goods</a>
+    <a href="kiro.html">Collections</a>
+  </nav>
+  <a href="index.html" class="logo">MOS</a>
+  <nav class="nav-right">
+    <a href="search.html">Search</a>
+    <a href="#">Stores</a>
+    <a href="login.html">Account</a>
+    <a href="cart.html">Cart</a>
+  </nav>
+</header>
+
+<main class="auth-page">
+  <section class="auth-panel">
+    <p class="auth-kicker">New Account</p>
+    <h1>Create your MOS account</h1>
+    <p class="auth-copy">Register with an email address or mobile number to keep your orders and preferences in one place.</p>
+
+    <div class="auth-tabs" role="tablist" aria-label="Registration methods">
+      <button class="auth-tab active" type="button" data-mode="email">Email</button>
+      <button class="auth-tab" type="button" data-mode="phone">Mobile</button>
+    </div>
+
+    <form class="auth-form active" data-mode="email" data-action="register">
+      <div class="auth-field">
+        <label for="registerEmail">Email</label>
+        <input id="registerEmail" name="email" type="email" autocomplete="email" required>
+      </div>
+      <div class="auth-field">
+        <label for="registerEmailPassword">Password</label>
+        <input id="registerEmailPassword" name="password" type="password" autocomplete="new-password" required>
+      </div>
+      <button class="auth-button" type="submit">Create Account</button>
+    </form>
+
+    <form class="auth-form" data-mode="phone" data-action="register">
+      <div class="auth-field">
+        <label for="registerPhone">Mobile number</label>
+        <input id="registerPhone" name="phone" type="tel" autocomplete="tel" required>
+      </div>
+      <div class="auth-field">
+        <label for="registerPhonePassword">Password</label>
+        <input id="registerPhonePassword" name="password" type="password" autocomplete="new-password" required>
+      </div>
+      <button class="auth-button" type="submit">Create Account</button>
+    </form>
+
+    <div class="auth-actions">
+      <a class="auth-link" href="login.html">Already have an account?</a>
+    </div>
+    <p class="auth-note" id="authNote"></p>
+  </section>
+
+  <aside class="auth-side" aria-label="MOS identity">
+    <div class="auth-brand">
+      <h2>MOS</h2>
+      <div class="mos-orb"></div>
+      <p>Mass · Order · Surge</p>
+    </div>
+  </aside>
+</main>
+
+<script src="account.js"></script>
+<script src="fixed-back.js"></script>
+<script src="mos-orb.js"></script>
+</body>
+</html>
