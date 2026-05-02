@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout | MOS</title>
+<link rel="icon" href="images/logo.png">
+<link rel="stylesheet" href="mos-orb.css">
+<link rel="stylesheet" href="fixed-back.css">
+<link rel="stylesheet" href="checkout.css">
+</head>
+<body>
+<header class="site-header">
+  <nav class="nav-left">
+    <a href="index.html">Featured</a>
+    <a href="kiro.html">Shop</a>
+    <a href="aiden.html">Leather Goods</a>
+    <a href="kiro.html">Collections</a>
+  </nav>
+  <a href="index.html" class="logo">MOS</a>
+  <nav class="nav-right">
+    <a href="search.html">Search</a>
+    <a href="#">Stores</a>
+    <a href="login.html">Account</a>
+    <a href="cart.html" id="cartLink">Cart</a>
+  </nav>
+</header>
+
+<main class="checkout-page" id="checkoutPage">
+  <div class="checkout-head">
+    <h1>Checkout</h1>
+    <a href="cart.html">Return to cart</a>
+  </div>
+
+  <div class="checkout-layout">
+    <form class="checkout-form" id="checkoutForm">
+      <section class="checkout-section">
+        <h2>Contact</h2>
+        <div class="field-grid">
+          <div class="field full">
+            <label for="email">Email or mobile number</label>
+            <input id="email" name="contact" type="text" autocomplete="email" required>
+          </div>
+        </div>
+      </section>
+
+      <section class="checkout-section">
+        <h2>Shipping Address</h2>
+        <div class="field-grid">
+          <div class="field">
+            <label for="firstName">First name</label>
+            <input id="firstName" name="firstName" autocomplete="given-name" required>
+          </div>
+          <div class="field">
+            <label for="lastName">Last name</label>
+            <input id="lastName" name="lastName" autocomplete="family-name" required>
+          </div>
+          <div class="field full">
+            <label for="address">Address</label>
+            <input id="address" name="address" autocomplete="street-address" required>
+          </div>
+          <div class="field">
+            <label for="city">City</label>
+            <input id="city" name="city" autocomplete="address-level2" required>
+          </div>
+          <div class="field">
+            <label for="country">Country / Region</label>
+            <select id="country" name="country" autocomplete="country-name">
+              <option>United States</option>
+              <option>Canada</option>
+              <option>China</option>
+              <option>Hong Kong SAR</option>
+              <option>Taiwan</option>
+              <option>United Kingdom</option>
+              <option>France</option>
+              <option>Germany</option>
+              <option>Italy</option>
+              <option>Spain</option>
+              <option>Netherlands</option>
+              <option>Switzerland</option>
+              <option>Australia</option>
+              <option>Japan</option>
+              <option>South Korea</option>
+              <option>Singapore</option>
+              <option>United Arab Emirates</option>
+            </select>
+          </div>
+        </div>
+      </section>
+
+      <section class="checkout-section">
+        <h2>Payment</h2>
+        <div class="payment-options">
+          <label class="payment-option">
+            <input type="radio" name="payment" value="visa" data-label="Visa" checked>
+            <strong>Visa</strong>
+            <span>Pay with a Visa credit or debit card</span>
+            <img class="payment-logo" src="images/payment-visa.png" alt="Visa">
+          </label>
+          <label class="payment-option">
+            <input type="radio" name="payment" value="paypal" data-label="PayPal">
+            <strong>PayPal</strong>
+            <span>Continue with a PayPal checkout simulation</span>
+            <img class="payment-logo" src="images/payment-paypal.png" alt="PayPal">
+          </label>
+          <label class="payment-option">
+            <input type="radio" name="payment" value="unionpay" data-label="UnionPay">
+            <strong>银联</strong>
+            <span>Pay with a UnionPay card simulation</span>
+            <img class="payment-logo" src="images/payment-unionpay.png" alt="UnionPay">
+          </label>
+          <label class="payment-option">
+            <input type="radio" name="payment" value="alipay" data-label="Alipay">
+            <strong>Alipay</strong>
+            <span>Simulated Alipay redirect flow</span>
+            <img class="payment-logo" src="images/payment-alipay.png" alt="Alipay">
+          </label>
+        </div>
+
+        <div class="card-fields" id="cardFields">
+          <div class="field full">
+            <label for="cardNumber">Card number</label>
+            <input id="cardNumber" name="cardNumber" inputmode="numeric" placeholder="1234 1234 1234 1234">
+          </div>
+          <div class="field">
+            <label for="expiry">Expiry</label>
+            <input id="expiry" name="expiry" placeholder="MM / YY">
+          </div>
+          <div class="field">
+            <label for="cvc">Security code</label>
+            <input id="cvc" name="cvc" inputmode="numeric" placeholder="CVC">
+          </div>
+        </div>
+      </section>
+    </form>
+
+    <aside class="summary">
+      <h2>Order Summary</h2>
+      <div class="summary-items" id="summaryItems"></div>
+      <div class="summary-line">
+        <span>Subtotal</span>
+        <span id="subtotal">$0.00</span>
+      </div>
+      <div class="summary-line">
+        <span>Shipping</span>
+        <span id="shipping">Complimentary</span>
+      </div>
+      <div class="summary-line">
+        <span>Taxes</span>
+        <span id="taxes">$0.00</span>
+      </div>
+      <div class="summary-line total">
+        <span>Total</span>
+        <span id="total">$0.00</span>
+      </div>
+      <button class="place-order" type="submit" form="checkoutForm">Place Demo Order</button>
+      <p class="checkout-note" id="checkoutNote">This is a front-end payment simulation. No payment will be processed.</p>
+    </aside>
+  </div>
+</main>
+
+<section class="empty-checkout" id="emptyCheckout">
+  <div class="mos-empty-mark" aria-hidden="true">
+    <div class="mos-orb"></div>
+    <div class="mos-orb-shadow"></div>
+  </div>
+  <h1>Your cart is empty</h1>
+  <p>Add a piece to your cart before starting checkout.</p>
+  <a href="kiro.html">Shop Collection</a>
+</section>
+
+<script src="checkout.js"></script>
+<script src="fixed-back.js"></script>
+<script src="mos-orb.js"></script>
+</body>
+</html>
