@@ -35,7 +35,9 @@ body {
 .site-header a {
   text-decoration: none;
   color: #111;
-  font-size: 14px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 13px;
+  letter-spacing: 0.15px;
   transition: opacity 0.2s ease;
 }
 
@@ -45,10 +47,11 @@ body {
 
 .site-header .logo {
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 38px;
+  font-size: 34px;
   line-height: 1;
-  letter-spacing: 1.2px;
+  letter-spacing: 1px;
   font-weight: 700;
+  color: rgba(0,0,0,0.82);
 }
 
 .checkout-page {

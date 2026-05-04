@@ -20,11 +20,13 @@ body {
 .site-header {
   position: fixed;   /* 和首页一致 */
   top: 0;
+  left: 0;
   width: 100%;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   padding: 24px 40px;
+  box-sizing: border-box;
   background: rgba(255,255,255,0.9);
   backdrop-filter: blur(10px);
   z-index: 999;
@@ -34,6 +36,7 @@ body {
 .nav-left,
 .nav-right {
   display: flex;
+  align-items: center;
   gap: 28px;
 }
 
@@ -44,17 +47,19 @@ body {
 /* logo */
 .site-header .logo {
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 38px;
+  font-size: 34px;
   line-height: 1;
-  letter-spacing: 1.2px;
+  letter-spacing: 1px;
   text-decoration: none;
-  color: #111;
+  color: rgba(0,0,0,0.82);
   font-weight: 700;
 }
 
 /* link */
 .site-header a {
-  font-size: 14px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 13px;
+  letter-spacing: 0.15px;
   text-decoration: none;
   color: #111;
   transition: 0.2s;
@@ -138,8 +143,11 @@ body {
   display: flex;
   justify-content: space-between;
   margin-top: 16px;
-  font-size: 13px;
-  letter-spacing: 0.5px;
+  font-family: "Avenir Next", Avenir, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.35;
 }
 
 .price {
@@ -173,7 +181,7 @@ body {
   <div class="nav-right">
     <a href="#">Search</a>
     <a href="login.html">Account</a>
-    <a href="cart.html">Cart</a>
+    <a href="cart.html" id="cartLink">Cart</a>
   </div>
 
 </header>
@@ -262,7 +270,7 @@ body {
 <a href="case7.html" class="card">
   <div class="img-wrap">
     <img src="images/kiro4.jpg" class="img-main">
-    <img src="images/kiro5.jpg" class="img-hover">
+    <img src="images/kiro5.1.jpg" class="img-hover">
   </div>
   <div class="info">
     <span>VOID NECKLACE</span>
@@ -272,7 +280,7 @@ body {
 
 <a href="case8.html" class="card">
   <div class="img-wrap">
-    <img src="images/kiro5.jpg" class="img-main">
+    <img src="images/kiro5.1.jpg" class="img-main">
     <img src="images/kiro2.jpg" class="img-hover">
   </div>
   <div class="info">
@@ -282,6 +290,24 @@ body {
 </a>
 </section>
 
+<script>
+function updateCartLink() {
+  const link = document.getElementById("cartLink");
+  if (!link) return;
+
+  let cart = [];
+  try {
+    cart = JSON.parse(localStorage.getItem("cart")) || [];
+  } catch (error) {
+    cart = [];
+  }
+
+  const count = cart.reduce((sum, item) => sum + Number(item.qty || 0), 0);
+  link.textContent = count ? "Cart (" + count + ")" : "Cart";
+}
+
+updateCartLink();
+</script>
 <script src="fixed-back.js"></script>
 <script src="mos-orb.js"></script>
 </body>
