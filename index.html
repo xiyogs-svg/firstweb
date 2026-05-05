@@ -197,12 +197,64 @@ body {
   margin-top: 118px;
   min-height: calc(100vh - 118px);
   height: calc(100vh - 118px);
-  background: #fff url('images/banner333.JPG') center -28px / 100% auto no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   box-sizing: border-box;
+  overflow: hidden;
+  background: #fff;
+}
+
+.hero-orbit {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  perspective-origin: 50% 42%;
+  z-index: 1;
+}
+
+.hero-orbit-track {
+  position: absolute;
+  top: 42%;
+  left: 50%;
+  width: 1px;
+  height: 1px;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.hero-panel {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: clamp(150px, 15vw, 280px);
+  aspect-ratio: 3 / 4;
+  display: block;
+  overflow: hidden;
+  background: rgba(255,255,255,0.92);
+  box-shadow: 0 22px 42px rgba(0,0,0,0.08);
+  transform: translate(-50%, -50%);
+  transform-style: preserve-3d;
+  backface-visibility: visible;
+  opacity: 0;
+  cursor: pointer;
+  will-change: transform, opacity;
+}
+
+.hero-panel:hover {
+  filter: contrast(1.04) saturate(1.04);
+}
+
+.hero-panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: block;
 }
 
 .hero-mark {
@@ -218,6 +270,7 @@ body {
   margin: 0;
   text-align: center;
   pointer-events: none;
+  z-index: 3;
 }
 
 .hero-mark h1 {
@@ -363,7 +416,19 @@ body {
     margin-top: 130px;
     min-height: calc(100vh - 130px);
     height: calc(100vh - 130px);
-    background-position: center -12px;
+  }
+
+  .hero-orbit {
+    perspective: 900px;
+    perspective-origin: 50% 42%;
+  }
+
+  .hero-orbit-track {
+    top: 42%;
+  }
+
+  .hero-panel {
+    width: clamp(108px, 28vw, 160px);
   }
 
   .hero-mark {
@@ -1092,6 +1157,34 @@ body {
 </aside>
 
 <section class="hero">
+  <div class="hero-orbit" aria-label="Featured stories">
+    <div class="hero-orbit-track" id="heroOrbitTrack">
+      <div class="hero-panel" aria-hidden="true">
+        <img src="images/hero-figures/figure-01.jpg" alt="">
+      </div>
+      <div class="hero-panel" aria-hidden="true">
+        <img src="images/hero-figures/figure-02.jpg" alt="">
+      </div>
+      <div class="hero-panel" aria-hidden="true">
+        <img src="images/hero-figures/figure-03.jpg" alt="">
+      </div>
+      <div class="hero-panel" aria-hidden="true">
+        <img src="images/hero-figures/figure-04.jpg" alt="">
+      </div>
+      <div class="hero-panel" aria-hidden="true">
+        <img src="images/hero-figures/figure-05.jpg" alt="">
+      </div>
+      <div class="hero-panel" aria-hidden="true">
+        <img src="images/hero-figures/figure-06.jpg" alt="">
+      </div>
+      <div class="hero-panel" aria-hidden="true">
+        <img src="images/hero-figures/figure-01.jpg" alt="">
+      </div>
+      <div class="hero-panel" aria-hidden="true">
+        <img src="images/hero-figures/figure-04.jpg" alt="">
+      </div>
+    </div>
+  </div>
   <div class="hero-mark">
     <h1>M O S</h1>
     <div class="orb" aria-hidden="true"></div>
@@ -1216,6 +1309,57 @@ function changePreview(previewId, imgSrc, text) {
     preview.classList.remove("is-switching");
   }, 120);
 }
+
+const heroOrbitTrack = document.getElementById("heroOrbitTrack");
+const heroPanels = Array.from(document.querySelectorAll(".hero-panel"));
+let heroRotation = 0;
+let heroLastFrame = null;
+let heroSpreadStart = null;
+
+function rotateHeroOrbit(timestamp) {
+  if (heroLastFrame === null) heroLastFrame = timestamp;
+  if (heroSpreadStart === null) heroSpreadStart = timestamp;
+
+  const delta = timestamp - heroLastFrame;
+  heroLastFrame = timestamp;
+  heroRotation = (heroRotation + delta * 0.00012) % (Math.PI * 2);
+
+  const spreadProgress = Math.min((timestamp - heroSpreadStart) / 1600, 1);
+  updateHeroPanels(0.72 + easeOutCubic(spreadProgress) * 0.28);
+
+  requestAnimationFrame(rotateHeroOrbit);
+}
+
+function updateHeroPanels(spread) {
+  const isMobile = window.matchMedia("(max-width: 760px)").matches;
+  const radiusX = (isMobile ? 240 : 500) * spread;
+  const radiusZ = (isMobile ? 95 : 175) * spread;
+  const total = heroPanels.length || 1;
+
+  heroPanels.forEach((panel, index) => {
+    const angle = heroRotation + (index / total) * Math.PI * 2;
+    const x = Math.sin(angle) * radiusX;
+    const z = Math.cos(angle) * radiusZ;
+    const depth = (Math.cos(angle) + 1) / 2;
+    const scale = 0.58 + depth * 0.52;
+    const opacity = 0.42 + depth * 0.58;
+    const tilt = -Math.sin(angle) * 34;
+    const y = (1 - depth) * 20;
+
+    panel.style.transform = `translate(-50%, -50%) translate3d(${x}px, ${y}px, ${z}px) rotateY(${tilt}deg) scale(${scale})`;
+    panel.style.opacity = opacity;
+    panel.style.zIndex = String(Math.round(depth * 100));
+  });
+}
+
+function easeOutCubic(value) {
+  return 1 - Math.pow(1 - value, 3);
+}
+
+if (heroOrbitTrack && heroPanels.length) {
+  requestAnimationFrame(rotateHeroOrbit);
+}
+
 let isSearchOpen = false;
 
 function getCart() {
