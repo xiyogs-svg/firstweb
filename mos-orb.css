@@ -99,6 +99,109 @@
   border: 0;
 }
 
+.nav-left .nav-item {
+  position: relative;
+  padding-bottom: 18px;
+  margin-bottom: -18px;
+}
+
+.nav-left .nav-item::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 100%;
+  width: min(920px, calc(100vw - 32px));
+  height: 24px;
+  pointer-events: auto;
+}
+
+.mega-menu {
+  position: absolute;
+  top: calc(100% + 18px);
+  left: 0;
+  width: min(920px, calc(100vw - 32px));
+  min-height: 360px;
+  background: rgba(255,255,255,0.965);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 16px 38px rgba(0,0,0,0.055);
+  padding: 30px 32px;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  box-sizing: border-box;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(8px);
+  transition: opacity 0.28s ease, transform 0.28s ease, visibility 0.28s ease;
+  z-index: 1200;
+}
+
+.mega-menu.is-shifted {
+  left: var(--mega-menu-left, 0);
+}
+
+.nav-item:hover .mega-menu,
+.mega-menu:hover {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.mega-links {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(120px, 1fr));
+  gap: 28px;
+  align-content: start;
+}
+
+.mega-column h4 {
+  margin: 0 0 15px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: rgba(0,0,0,0.42);
+}
+
+.mega-column a {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 13px;
+  line-height: 1.45;
+  color: #111;
+}
+
+.mega-preview {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.mega-preview img {
+  width: 100%;
+  height: 255px;
+  object-fit: cover;
+  display: block;
+  opacity: 1;
+  transition: opacity 0.25s ease;
+}
+
+.mega-preview p {
+  margin: 14px 0 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 13px;
+  color: #111;
+  letter-spacing: 0.3px;
+}
+
+.mega-preview.is-switching img {
+  opacity: 0.35;
+}
+
 .nav-icon-link {
   position: relative;
   display: inline-flex;
@@ -219,6 +322,25 @@
   width: 34px;
   height: 7px;
   margin-top: -13px;
+}
+
+@media (max-width: 900px) {
+  .mega-menu {
+    width: calc(100vw - 32px);
+    min-height: 0;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 24px;
+  }
+
+  .mega-links {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .mega-preview img {
+    height: 180px;
+  }
 }
 
 @keyframes mosOrbBounce {

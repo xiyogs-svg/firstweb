@@ -87,7 +87,7 @@ body {
 
 /* 横图 */
 .hero-img {
-  width: 100%;
+  width: calc(100% - 56px);
   max-width: 2100px;
   margin: 0 auto;
 }
@@ -116,7 +116,8 @@ body {
 /* 图片 */
 .img-wrap {
   position: relative;
-  height: 320px;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
 }
 
 .img-wrap img {
@@ -139,6 +140,52 @@ body {
   opacity: 0;
 }
 
+.favorite-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 3;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #111;
+  cursor: pointer;
+}
+
+.favorite-btn::before,
+.favorite-btn::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  width: 13px;
+  height: 20px;
+  border: 2.2px solid currentColor;
+  border-bottom: 0;
+  border-radius: 13px 13px 0 0;
+  background: transparent;
+  box-sizing: border-box;
+  transition: background 0.18s ease;
+}
+
+.favorite-btn::before {
+  left: 7px;
+  transform: rotate(-45deg);
+  transform-origin: 100% 100%;
+}
+
+.favorite-btn::after {
+  left: 14px;
+  transform: rotate(45deg);
+  transform-origin: 0 100%;
+}
+
+.favorite-btn.is-active::before,
+.favorite-btn.is-active::after {
+  background: currentColor;
+}
+
 /* 信息 */
 .info {
   display: flex;
@@ -156,6 +203,10 @@ body {
 }
 
 @media (max-width: 760px) {
+  .hero-img {
+    width: calc(100% - 32px);
+  }
+
   .site-header .logo {
     font-size: 30px;
     letter-spacing: 1px;
@@ -171,9 +222,39 @@ body {
   <div class="nav-left">
     <a href="#">Featured</a>
     <a href="collection.html">Shop</a>
-    <a href="#">Leather Goods</a>
     <a href="#">Collections</a>
-    <a href="#">Art of Living</a>
+    <div class="nav-item">
+      <a href="#">Art of Living</a>
+      <div class="mega-menu">
+        <div class="mega-links">
+          <div class="mega-column">
+            <h4>Objects</h4>
+            <a href="aiden.html" onmouseenter="changePreview('preview-living','images/aiden.png','Bags')">Bags</a>
+            <a href="#" onmouseenter="changePreview('preview-living','images/pic5.jpg','Objects')">Objects</a>
+            <a href="#" onmouseenter="changePreview('preview-living','images/pic6.jpg','Belts')">Belts</a>
+          </div>
+
+          <div class="mega-column">
+            <h4>Spaces</h4>
+            <a href="#" onmouseenter="changePreview('preview-living','images/pic3.jpg','Home')">Home</a>
+            <a href="#" onmouseenter="changePreview('preview-living','images/pic4.jpg','Travel')">Travel</a>
+            <a href="#" onmouseenter="changePreview('preview-living','images/kiro1.jpg','Daily Rituals')">Daily Rituals</a>
+          </div>
+
+          <div class="mega-column">
+            <h4>Series</h4>
+            <a href="aiden.html" onmouseenter="changePreview('preview-living','images/aiden.png','AIDEN')">AIDEN</a>
+            <a href="#" onmouseenter="changePreview('preview-living','images/pic2.jpg','Archive')">Archive</a>
+            <a href="#" onmouseenter="changePreview('preview-living','images/kirolab.png','MOS Lab')">MOS Lab</a>
+          </div>
+        </div>
+
+        <div class="mega-preview" id="preview-living">
+          <img src="images/aiden.png" alt="">
+          <p>Art of Living</p>
+        </div>
+      </div>
+    </div>
     <a href="#">Fragrances</a>
     <a href="#">Gifts</a>
   </div>
@@ -208,6 +289,7 @@ body {
     <div class="img-wrap">
       <img src="images/kiro1.jpg" class="img-main">
       <img src="images/kiro1.png" class="img-hover">
+      <button class="favorite-btn" type="button" aria-label="Add TEVIS TOP to wishlist"></button>
     </div>
     <div class="info">
       <span>TEVIS TOP</span>
@@ -219,6 +301,7 @@ body {
     <div class="img-wrap">
       <img src="images/kiro2.3.png" class="img-main">
       <img src="images/kiro2.1.jpg" class="img-hover">
+      <button class="favorite-btn" type="button" aria-label="Add KILIAN SKIRT to wishlist"></button>
     </div>
     <div class="info">
       <span>KILIAN SKIRT</span>
@@ -230,6 +313,7 @@ body {
     <div class="img-wrap">
       <img src="images/case21.png" class="img-main">
       <img src="images/case23.png" class="img-hover">
+      <button class="favorite-btn" type="button" aria-label="Add BLAKE CLUTCH to wishlist"></button>
     </div>
     <div class="info">
       <span>BLAKE CLUTCH</span>
@@ -241,6 +325,7 @@ body {
     <div class="img-wrap">
       <img src="images/kiro5.11.png" class="img-main">
       <img src="images/kiro5.1.jpg" class="img-hover">
+      <button class="favorite-btn" type="button" aria-label="Add MILLY PUMP to wishlist"></button>
     </div>
     <div class="info">
       <span>MILLY PUMP</span>
@@ -253,6 +338,7 @@ body {
   <div class="img-wrap">
     <img src="images/kiro2.jpg" class="img-main">
     <img src="images/kiro3.jpg" class="img-hover">
+    <button class="favorite-btn" type="button" aria-label="Add KIRO RING to wishlist"></button>
   </div>
   <div class="info">
     <span>KIRO RING</span>
@@ -264,6 +350,7 @@ body {
   <div class="img-wrap">
     <img src="images/kiro3.jpg" class="img-main">
     <img src="images/kiro4.jpg" class="img-hover">
+    <button class="favorite-btn" type="button" aria-label="Add STRUCT BAG to wishlist"></button>
   </div>
   <div class="info">
     <span>STRUCT BAG</span>
@@ -275,6 +362,7 @@ body {
   <div class="img-wrap">
     <img src="images/kiro4.jpg" class="img-main">
     <img src="images/kiro5.1.jpg" class="img-hover">
+    <button class="favorite-btn" type="button" aria-label="Add VOID NECKLACE to wishlist"></button>
   </div>
   <div class="info">
     <span>VOID NECKLACE</span>
@@ -286,6 +374,7 @@ body {
   <div class="img-wrap">
     <img src="images/kiro5.1.jpg" class="img-main">
     <img src="images/kiro2.jpg" class="img-hover">
+    <button class="favorite-btn" type="button" aria-label="Add KIRO HEELS to wishlist"></button>
   </div>
   <div class="info">
     <span>KIRO HEELS</span>
@@ -312,6 +401,18 @@ function updateCartLink() {
 }
 
 updateCartLink();
+
+document.querySelectorAll(".favorite-btn").forEach(button => {
+  button.addEventListener("click", event => {
+    event.preventDefault();
+    event.stopPropagation();
+    button.classList.toggle("is-active");
+    button.setAttribute(
+      "aria-label",
+      button.classList.contains("is-active") ? "Remove from wishlist" : "Add to wishlist"
+    );
+  });
+});
 </script>
 <script src="fixed-back.js"></script>
 <script src="mos-orb.js"></script>
