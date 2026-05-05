@@ -27,6 +27,23 @@ function hideMosLoading() {
   ensureMosLoader().classList.remove("active");
 }
 
+function getMosCartCount() {
+  try {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    return cart.reduce((sum, item) => sum + Number(item.qty || 0), 0);
+  } catch (error) {
+    return 0;
+  }
+}
+
+function updateMosCartIcons() {
+  const count = getMosCartCount();
+  document.querySelectorAll(".nav-cart").forEach(link => {
+    link.dataset.count = count ? String(count) : "";
+    link.setAttribute("aria-label", count ? "Cart (" + count + ")" : "Cart");
+  });
+}
+
 function shouldShowMosLoading(link) {
   if (!link || link.target === "_blank" || link.hasAttribute("download")) return false;
   if (link.hasAttribute("onclick")) return false;
@@ -48,3 +65,5 @@ document.addEventListener("click", event => {
 });
 
 window.addEventListener("pageshow", hideMosLoading);
+window.addEventListener("pageshow", updateMosCartIcons);
+document.addEventListener("DOMContentLoaded", updateMosCartIcons);

@@ -12,7 +12,8 @@ function updateCartLink() {
   if (!link) return;
 
   const count = cart.reduce((sum, item) => sum + Number(item.qty || 0), 0);
-  link.textContent = count ? "Cart (" + count + ")" : "Cart";
+  link.dataset.count = count ? String(count) : "";
+  link.setAttribute("aria-label", count ? "Cart (" + count + ")" : "Cart");
 }
 
 function addToCart() {

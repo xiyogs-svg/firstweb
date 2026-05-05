@@ -36,7 +36,7 @@ body {
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 22px;
 }
 
 .nav-right {
@@ -360,6 +360,9 @@ body {
     <a href="kiro.html">Shop</a>
     <a href="aiden.html">Leather Goods</a>
     <a href="kiro.html">Collections</a>
+    <a href="#">Art of Living</a>
+    <a href="#">Fragrances</a>
+    <a href="#">Gifts</a>
   </div>
 
   <div class="nav-center">
@@ -367,9 +370,9 @@ body {
   </div>
 
   <div class="nav-right">
-    <a href="search.html">Search</a>
-    <a href="login.html">Account</a>
-    <a href="cart.html" id="cartLink">Cart</a>
+    <a href="search.html" class="nav-icon-link" aria-label="Search"><span class="nav-icon nav-icon-search" aria-hidden="true"></span><span class="sr-only">Search</span></a>
+    <a href="login.html" class="nav-icon-link" aria-label="Account"><span class="nav-icon nav-icon-account" aria-hidden="true"></span><span class="sr-only">Account</span></a>
+    <a href="cart.html" id="cartLink" class="nav-icon-link nav-cart" aria-label="Cart"><span class="nav-icon nav-icon-bag" aria-hidden="true"></span><span class="sr-only">Cart</span></a>
   </div>
 </header>
 
@@ -439,7 +442,9 @@ function getCartCount(cart) {
 
 function updateCartLink(cart) {
   const count = getCartCount(cart);
-  document.getElementById("cartLink").textContent = count ? "Cart (" + count + ")" : "Cart";
+  const link = document.getElementById("cartLink");
+  link.dataset.count = count ? String(count) : "";
+  link.setAttribute("aria-label", count ? "Cart (" + count + ")" : "Cart");
 }
 
 function renderCart() {

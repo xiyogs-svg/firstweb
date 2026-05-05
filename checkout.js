@@ -25,7 +25,8 @@ function updateCartLink(cart) {
   const link = document.getElementById("cartLink");
   if (!link) return;
   const count = getCartCount(cart);
-  link.textContent = count ? "Cart (" + count + ")" : "Cart";
+  link.dataset.count = count ? String(count) : "";
+  link.setAttribute("aria-label", count ? "Cart (" + count + ")" : "Cart");
 }
 
 function renderSummary() {
