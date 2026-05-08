@@ -19,7 +19,8 @@ function getProductUrl(item) {
     "tevis-top": "kiro1.html",
     "kilian-skirt": "kiro2.html",
     "blake-clutch": "kiro3.html",
-    "milly-pump": "kiro4.html"
+    "milly-pump": "kiro4.html",
+    "bare-earth-01": "bare-earth-01.html"
   };
   return item.url || productUrls[item.id] || "";
 }

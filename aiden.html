@@ -79,8 +79,9 @@ body {
 /* 返回 */
 /* 标题 */
 .title {
-  font-family: "Playfair Display", serif;
+  font-family: Georgia, "Times New Roman", serif;
   font-size: 40px;
+  font-weight: 700;
   letter-spacing: 2px;
   margin-bottom: 60px;
 }
@@ -98,16 +99,53 @@ body {
   object-fit: cover;
 }
 
+.collection-copy {
+  max-width: 620px;
+  margin: 30px auto 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  line-height: 1.55;
+  color: rgba(0,0,0,0.68);
+}
+
+.collection-toolbar {
+  width: min(1180px, calc(100% - 76px));
+  margin: 74px auto 28px;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+  padding-bottom: 18px;
+}
+
+.collection-toolbar h2 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.collection-toolbar p {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(0,0,0,0.54);
+}
+
 /* ===== 商品网格 ===== */
 .grid {
+  width: min(1180px, calc(100% - 76px));
+  margin: 0 auto 96px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  margin-top: 80px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 42px 22px;
 }
 
 /* 商品卡 */
 .card {
-  padding: 40px 20px 20px;
+  min-width: 0;
+  padding: 0;
   text-decoration: none;
   color: #111;
 }
@@ -115,7 +153,8 @@ body {
 /* 图片 */
 .img-wrap {
   position: relative;
-  height: 320px;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
 }
 
 .img-wrap img {
@@ -155,6 +194,22 @@ body {
 }
 
 @media (max-width: 760px) {
+  .collection-copy {
+    padding: 0 18px;
+    font-size: 16px;
+  }
+
+  .collection-toolbar {
+    width: calc(100% - 36px);
+    margin-top: 54px;
+  }
+
+  .grid {
+    width: calc(100% - 36px);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 34px 14px;
+  }
+
   .site-header .logo {
     font-size: 30px;
     letter-spacing: 1px;
@@ -228,9 +283,16 @@ body {
     <img src="images/aiden.png">
   </div>
 
+  <p class="collection-copy">A refined study of form, utility, and everyday structure.</p>
+
 </section>
 
 <!-- ===== 商品 ===== -->
+<section class="collection-toolbar" aria-label="AIDEN products">
+  <h2>AIDEN Collection</h2>
+  <p>8 products</p>
+</section>
+
 <section class="grid">
 
   <a href="kiro1.html" class="card">

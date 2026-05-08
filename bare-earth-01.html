@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BARE EARTH 01 | MOS</title>
+<link rel="icon" href="images/logo.png">
+<link rel="stylesheet" href="mos-orb.css">
+<link rel="stylesheet" href="fixed-back.css">
+<link rel="stylesheet" href="product.css">
+</head>
+<body>
+<div class="promo">Free shipping in mainland China. Free shipping outside mainland China on orders over $100.</div>
+<header class="site-header">
+  <nav class="nav-left">
+    <a href="index.html">Featured</a>
+    <a href="kiro.html">Shop</a>
+    <a href="kiro.html">Collections</a>
+    <a href="#">Art of Living</a>
+    <a href="#">Fragrances</a>
+    <a href="#">Gifts</a>
+  </nav>
+  <a href="index.html" class="logo">MOS</a>
+  <nav class="nav-right">
+    <a href="search.html" class="nav-icon-link" aria-label="Search"><span class="nav-icon nav-icon-search" aria-hidden="true"></span><span class="sr-only">Search</span></a>
+    <a href="login.html" class="nav-icon-link" aria-label="Account"><span class="nav-icon nav-icon-account" aria-hidden="true"></span><span class="sr-only">Account</span></a>
+    <a href="cart.html" id="cartLink" class="nav-icon-link nav-cart" aria-label="Cart"><span class="nav-icon nav-icon-bag" aria-hidden="true"></span><span class="sr-only">Cart</span></a>
+  </nav>
+</header>
+
+<main class="product-page">
+  <section class="product-media">
+    <div class="product-thumbs" aria-label="Product images">
+      <button class="product-thumb active" type="button" data-image="images/xiangxun1.png"><img src="images/xiangxun1.png" alt=""></button>
+      <button class="product-thumb" type="button" data-image="images/xiangxun2.png"><img src="images/xiangxun2.png" alt=""></button>
+      <button class="product-thumb" type="button" data-image="images/xiangxun3.png"><img src="images/xiangxun3.png" alt=""></button>
+      <button class="product-thumb" type="button" data-image="images/xiangxun4.png"><img src="images/xiangxun4.png" alt=""></button>
+      <button class="product-thumb" type="button" data-image="images/xiangxun5.png"><img src="images/xiangxun5.png" alt=""></button>
+      <button class="product-thumb" type="button" data-image="images/xiangxun6.png"><img src="images/xiangxun6.png" alt=""></button>
+    </div>
+    <div class="product-main">
+      <img id="productMainImg" src="images/xiangxun1.png" alt="BARE EARTH 01">
+    </div>
+  </section>
+
+  <section class="product-info">
+    <div class="title-row">
+      <h1>BARE EARTH 01</h1>
+      <p class="price">$120</p>
+    </div>
+    <p class="section-label">Scent&nbsp;&nbsp;<span id="selectedColor">Verde Silva</span></p>
+    <p class="section-label">Format&nbsp;&nbsp;75 ml / 2.5 fl. oz.</p>
+    <p class="description">A green mineral fragrance built around shaded leaf, cool resin, and polished glass. Quiet, precise, and grounded.</p>
+    <p class="sku">SKU: FR-BARE-EARTH-001</p>
+    <button class="add-btn" type="button" onclick="addToCart()">Add To Cart</button>
+    <a href="fragrances.html" class="store-link">Back to Fragrances</a>
+    <div class="accordion">
+      <button type="button">Notes <span>+</span></button>
+      <button type="button">Details <span>+</span></button>
+      <button type="button">Shipping and Returns <span>+</span></button>
+    </div>
+  </section>
+</main>
+
+<script>
+const product = {
+  id: "bare-earth-01",
+  name: "BARE EARTH 01",
+  price: 120,
+  color: "Verde Silva",
+  image: "images/xiangxun1.png",
+  url: "bare-earth-01.html"
+};
+</script>
+<script src="product-page.js"></script>
+<script src="fixed-back.js"></script>
+<script src="mos-orb.js"></script>
+</body>
+</html>

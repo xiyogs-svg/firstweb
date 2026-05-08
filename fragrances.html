@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fragrances | MOS</title>
+<link rel="stylesheet" href="fixed-back.css">
+<link rel="stylesheet" href="mos-orb.css">
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Helvetica, Arial, sans-serif;
+  color: #111;
+  background: #fff;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  color: #fff;
+  font-size: 13px;
+  z-index: 1000;
+}
+
+.site-header {
+  position: fixed;
+  top: 34px;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 22px 40px;
+  box-sizing: border-box;
+  background: rgba(255,255,255,0.82);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid transparent;
+}
+
+.nav-left,
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.nav-right {
+  justify-content: flex-end;
+}
+
+.site-header a {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 13px;
+  letter-spacing: 0.15px;
+  transition: opacity 0.2s ease;
+}
+
+.site-header a:hover {
+  opacity: 0.55;
+}
+
+.site-header .logo {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: rgba(0,0,0,0.82);
+}
+
+.nav-icon-link {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-icon {
+  position: relative;
+  width: 22px;
+  height: 22px;
+  display: inline-block;
+  box-sizing: border-box;
+  color: #111;
+}
+
+.nav-icon-search {
+  width: 18px;
+  height: 18px;
+}
+
+.nav-icon-search::before {
+  content: "";
+  position: absolute;
+  left: 1px;
+  top: 1px;
+  width: 11px;
+  height: 11px;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+.nav-icon-search::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  top: 12px;
+  width: 7px;
+  height: 1.5px;
+  border-radius: 999px;
+  background: currentColor;
+  transform: rotate(45deg);
+  transform-origin: left center;
+}
+
+.nav-icon-account::before {
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 6px;
+  width: 6px;
+  height: 6px;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  box-sizing: border-box;
+}
+
+.nav-icon-account::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  bottom: 1px;
+  width: 12px;
+  height: 9px;
+  border: 1.5px solid currentColor;
+  border-bottom: 0;
+  border-radius: 9px 9px 0 0;
+  box-sizing: border-box;
+}
+
+.nav-icon-bag {
+  top: 2px;
+  width: 16px;
+  height: 14px;
+  border: 1.5px solid currentColor;
+}
+
+.nav-icon-bag::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: -6px;
+  width: 6px;
+  height: 6px;
+  border: 1.5px solid currentColor;
+  border-bottom: 0;
+  border-radius: 7px 7px 0 0;
+  box-sizing: border-box;
+}
+
+.nav-cart::after {
+  content: attr(data-count);
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 4px;
+  border-radius: 999px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: #111;
+  color: #fff;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 10px;
+  line-height: 16px;
+}
+
+.nav-cart[data-count]:not([data-count=""])::after {
+  display: flex;
+}
+
+.collection-hero {
+  padding: 154px 38px 0;
+  text-align: center;
+}
+
+.collection-title {
+  margin: 0 0 60px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.hero-image {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+}
+
+.hero-image img {
+  width: 100%;
+  aspect-ratio: 16 / 7;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.collection-copy {
+  max-width: 620px;
+  margin: 30px auto 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  line-height: 1.55;
+  color: rgba(0,0,0,0.68);
+}
+
+.fragrance-toolbar {
+  width: min(1180px, calc(100% - 76px));
+  margin: 74px auto 28px;
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+  padding-bottom: 18px;
+}
+
+.fragrance-toolbar h2 {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28px;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.fragrance-toolbar p {
+  margin: 0;
+  font-size: 13px;
+  color: rgba(0,0,0,0.54);
+}
+
+.product-grid {
+  width: min(1180px, calc(100% - 76px));
+  margin: 0 auto 96px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 42px 22px;
+}
+
+.product-card {
+  min-width: 0;
+}
+
+.product-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  background: #f4f4f2;
+  overflow: hidden;
+}
+
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.08);
+}
+
+.favorite-btn {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  z-index: 3;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #111;
+  cursor: pointer;
+}
+
+.favorite-btn::before,
+.favorite-btn::after {
+  content: "";
+  position: absolute;
+  top: 8px;
+  width: 13px;
+  height: 20px;
+  border: 2.2px solid currentColor;
+  border-bottom: 0;
+  border-radius: 13px 13px 0 0;
+  background: transparent;
+  box-sizing: border-box;
+  transition: background 0.18s ease;
+}
+
+.favorite-btn::before {
+  left: 7px;
+  transform: rotate(-45deg);
+  transform-origin: 100% 100%;
+}
+
+.favorite-btn::after {
+  left: 14px;
+  transform: rotate(45deg);
+  transform-origin: 0 100%;
+}
+
+.favorite-btn.is-active::before,
+.favorite-btn.is-active::after {
+  background: currentColor;
+}
+
+.product-info {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+  font-family: "Avenir Next", Avenir, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.35;
+}
+
+.product-name,
+.product-price {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+}
+
+.product-price {
+  color: #666;
+}
+
+@media (max-width: 900px) {
+  .site-header {
+    height: auto;
+    min-height: 68px;
+    grid-template-columns: 1fr auto;
+    gap: 14px;
+    padding: 14px 18px;
+  }
+
+  .nav-left {
+    order: 3;
+    grid-column: 1 / -1;
+    flex-wrap: wrap;
+    gap: 14px 18px;
+  }
+
+  .nav-center {
+    justify-self: start;
+  }
+
+  .site-header .logo {
+    font-size: 30px;
+  }
+
+  .collection-hero {
+    padding: 54px 18px 0;
+  }
+
+  .collection-title {
+    margin-bottom: 30px;
+    font-size: 34px;
+    letter-spacing: 2px;
+  }
+
+  .hero-image img {
+    aspect-ratio: 4 / 3;
+  }
+
+  .fragrance-toolbar,
+  .product-grid {
+    width: calc(100% - 36px);
+  }
+
+  .product-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 34px 14px;
+  }
+}
+</style>
+</head>
+
+<body>
+<div class="topbar">Free shipping in mainland China. Free shipping outside mainland China on orders over $100.</div>
+
+<header class="site-header">
+  <nav class="nav-left" aria-label="Primary">
+    <a href="index.html">Featured</a>
+    <a href="kiro.html">Shop</a>
+    <a href="#">Collections</a>
+    <a href="#">Art of Living</a>
+    <a href="#">Fragrances</a>
+    <a href="#">Gifts</a>
+  </nav>
+
+  <div class="nav-center">
+    <a href="index.html" class="logo">MOS</a>
+  </div>
+
+  <nav class="nav-right" aria-label="Utility">
+    <a href="search.html" class="nav-icon-link" aria-label="Search"><span class="nav-icon nav-icon-search" aria-hidden="true"></span><span class="sr-only">Search</span></a>
+    <a href="login.html" class="nav-icon-link" aria-label="Account"><span class="nav-icon nav-icon-account" aria-hidden="true"></span><span class="sr-only">Account</span></a>
+    <a href="cart.html" class="nav-icon-link nav-cart" aria-label="Cart"><span class="nav-icon nav-icon-bag" aria-hidden="true"></span><span class="sr-only">Cart</span></a>
+  </nav>
+</header>
+
+<main>
+  <section class="collection-hero">
+    <h1 class="collection-title">FRAGRANCES</h1>
+    <div class="hero-image">
+      <img src="images/fragrances-mega.png" alt="Bare Earth fragrance collection">
+    </div>
+    <p class="collection-copy">A mineral fragrance study shaped around earth, glass, resin, and quiet ritual.</p>
+  </section>
+
+  <section class="fragrance-toolbar" aria-label="Fragrance products">
+    <h2>All Fragrances</h2>
+    <p>6 products</p>
+  </section>
+
+  <section class="product-grid">
+
+    <a href="bare-earth-01.html" class="product-card">
+      <div class="product-image">
+        <img src="images/fragrances-mega.png" alt="Bare Earth 01 Verde Silva" style="object-position: 9% center;">
+        <button class="favorite-btn" type="button" aria-label="Add BARE EARTH 01 to wishlist"></button>
+      </div>
+      <div class="product-info">
+        <span class="product-name">BARE EARTH 01</span>
+        <span class="product-price">$120</span>
+      </div>
+    </a>
+
+    <a href="#" class="product-card">
+      <div class="product-image">
+        <img src="images/fragrances-mega.png" alt="Bare Earth 02 Terrain" style="object-position: 35% center;">
+        <button class="favorite-btn" type="button" aria-label="Add BARE EARTH 02 to wishlist"></button>
+      </div>
+      <div class="product-info">
+        <span class="product-name">BARE EARTH 02</span>
+        <span class="product-price">$120</span>
+      </div>
+    </a>
+
+    <a href="#" class="product-card">
+      <div class="product-image">
+        <img src="images/fragrances-mega.png" alt="Bare Earth 03 Palo Verde" style="object-position: 62% center;">
+        <button class="favorite-btn" type="button" aria-label="Add BARE EARTH 03 to wishlist"></button>
+      </div>
+      <div class="product-info">
+        <span class="product-name">BARE EARTH 03</span>
+        <span class="product-price">$120</span>
+      </div>
+    </a>
+
+    <a href="#" class="product-card">
+      <div class="product-image">
+        <img src="images/fragrances-mega.png" alt="Bare Earth 04 Mineral Noir" style="object-position: 91% center;">
+        <button class="favorite-btn" type="button" aria-label="Add BARE EARTH 04 to wishlist"></button>
+      </div>
+      <div class="product-info">
+        <span class="product-name">BARE EARTH 04</span>
+        <span class="product-price">$120</span>
+      </div>
+    </a>
+
+    <a href="#" class="product-card">
+      <div class="product-image">
+        <img src="images/fragrances-mega.png" alt="Bare Earth Discovery Set" style="object-position: 50% center;">
+        <button class="favorite-btn" type="button" aria-label="Add DISCOVERY SET to wishlist"></button>
+      </div>
+      <div class="product-info">
+        <span class="product-name">DISCOVERY SET</span>
+        <span class="product-price">$68</span>
+      </div>
+    </a>
+
+    <a href="#" class="product-card">
+      <div class="product-image">
+        <img src="images/fragrances-mega.png" alt="Bare Earth Travel Format" style="object-position: 70% center;">
+        <button class="favorite-btn" type="button" aria-label="Add TRAVEL FORMAT to wishlist"></button>
+      </div>
+      <div class="product-info">
+        <span class="product-name">TRAVEL FORMAT</span>
+        <span class="product-price">$48</span>
+      </div>
+    </a>
+
+  </section>
+</main>
+
+<script src="fixed-back.js"></script>
+<script src="mos-orb.js"></script>
+<script>
+document.querySelectorAll(".favorite-btn").forEach(button => {
+  button.addEventListener("click", event => {
+    event.preventDefault();
+    event.stopPropagation();
+    button.classList.toggle("is-active");
+    button.setAttribute(
+      "aria-label",
+      button.classList.contains("is-active") ? "Remove from wishlist" : "Add to wishlist"
+    );
+  });
+});
+</script>
+</body>
+</html>
