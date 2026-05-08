@@ -114,11 +114,25 @@ body {
   border-bottom: 1px solid #eee;
 }
 
-.cart-item img {
+.cart-product-link,
+.cart-item > img {
+  display: block;
+  width: 132px;
+  height: 164px;
+  background: #f6f6f6;
+}
+
+.cart-product-link img,
+.cart-item > img {
   width: 132px;
   height: 164px;
   object-fit: cover;
-  background: #f6f6f6;
+  display: block;
+  transition: opacity 0.2s ease;
+}
+
+.cart-product-link:hover img {
+  opacity: 0.78;
 }
 
 .item-info {
@@ -339,7 +353,9 @@ body {
     gap: 18px;
   }
 
-  .cart-item img {
+  .cart-product-link,
+  .cart-product-link img,
+  .cart-item > img {
     width: 96px;
     height: 124px;
   }
@@ -452,14 +468,49 @@ body {
 <script>
 function getCart() {
   try {
-    return JSON.parse(localStorage.getItem("cart")) || [];
+    return normalizeCart(JSON.parse(localStorage.getItem("cart")) || []);
   } catch (error) {
     return [];
   }
 }
 
+function getCartItemKey(item) {
+  return [
+    item.id || item.name || "",
+    item.color || "Black",
+    item.size || ""
+  ].join("::").toLowerCase();
+}
+
+function getProductUrl(item) {
+  const productUrls = {
+    "tevis-top": "kiro1.html",
+    "kilian-skirt": "kiro2.html",
+    "blake-clutch": "kiro3.html",
+    "milly-pump": "kiro4.html"
+  };
+  return item.url || productUrls[item.id] || "";
+}
+
+function normalizeCart(cart) {
+  return cart.reduce((merged, item) => {
+    if (!item) return merged;
+    const qty = Number(item.qty || 1);
+    if (qty <= 0) return merged;
+
+    const existing = merged.find(entry => getCartItemKey(entry) === getCartItemKey(item));
+    if (existing) {
+      existing.qty = Number(existing.qty || 0) + qty;
+    } else {
+      merged.push({...item, qty, url: getProductUrl(item)});
+    }
+
+    return merged;
+  }, []);
+}
+
 function saveCart(cart) {
-  localStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem("cart", JSON.stringify(normalizeCart(cart)));
 }
 
 function formatPrice(value) {
@@ -498,9 +549,11 @@ function renderCart() {
   cartList.innerHTML = cart.map((item, index) => {
     const qty = Number(item.qty || 1);
     const price = Number(item.price || 0);
+    const url = getProductUrl(item);
+    const image = `<img src="${item.image || "images/logo.png"}" alt="${item.name || "Product"}">`;
     return `
       <article class="cart-item">
-        <img src="${item.image || "images/logo.png"}" alt="${item.name || "Product"}">
+        ${url ? `<a class="cart-product-link" href="${url}" aria-label="View ${item.name || "Product"}">${image}</a>` : image}
         <div class="item-info">
           <h2 class="item-title">${item.name || "Product"}</h2>
           <p class="item-meta">MOS<br>${formatPrice(price)}</p>

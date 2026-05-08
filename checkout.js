@@ -1,13 +1,48 @@
 function getCart() {
   try {
-    return JSON.parse(localStorage.getItem("cart")) || [];
+    return normalizeCart(JSON.parse(localStorage.getItem("cart")) || []);
   } catch (error) {
     return [];
   }
 }
 
+function getCartItemKey(item) {
+  return [
+    item.id || item.name || "",
+    item.color || "Black",
+    item.size || ""
+  ].join("::").toLowerCase();
+}
+
+function getProductUrl(item) {
+  const productUrls = {
+    "tevis-top": "kiro1.html",
+    "kilian-skirt": "kiro2.html",
+    "blake-clutch": "kiro3.html",
+    "milly-pump": "kiro4.html"
+  };
+  return item.url || productUrls[item.id] || "";
+}
+
+function normalizeCart(cart) {
+  return cart.reduce((merged, item) => {
+    if (!item) return merged;
+    const qty = Number(item.qty || 1);
+    if (qty <= 0) return merged;
+
+    const existing = merged.find(entry => getCartItemKey(entry) === getCartItemKey(item));
+    if (existing) {
+      existing.qty = Number(existing.qty || 0) + qty;
+    } else {
+      merged.push({...item, qty, url: getProductUrl(item)});
+    }
+
+    return merged;
+  }, []);
+}
+
 function saveCart(cart) {
-  localStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem("cart", JSON.stringify(normalizeCart(cart)));
 }
 
 function formatMoney(value) {

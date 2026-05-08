@@ -440,6 +440,19 @@ body {
     letter-spacing: 10px;
   }
 
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    width: calc(100% - 32px);
+    margin-top: 72px;
+  }
+
+  .card p {
+    top: 28px;
+    left: 28px;
+    font-size: 13px;
+  }
+
   .orb {
     top: 8px;
     width: 26px;
@@ -474,9 +487,10 @@ body {
 /* 项目列表 */
 .grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-top: 120px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 34px 34px;
+  width: min(1040px, calc(100% - 96px));
+  margin: 120px auto 0;
 }
 
 .card {
@@ -489,7 +503,8 @@ body {
 
 .card img {
   width: 100%;
-  height: 350px;
+  aspect-ratio: 16 / 9;
+  height: auto;
   object-fit: cover;
   transition: 0.4s;
   display: block;
@@ -500,32 +515,47 @@ body {
   opacity: 0.85;
 }
 
+.card.is-kiro img {
+  transform: scale(1.2);
+}
+
+.card.is-kiro:hover img {
+  transform: scale(1.25);
+}
+
 .overlay {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 45px;
-  background: rgba(0, 0, 0, 0.2);
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.18), transparent 38%, rgba(0,0,0,0.05));
   z-index: 1;
   transition: 0.4s;
 }
 
 .card:hover .overlay {
-  background: rgba(0, 0, 0, 0.35);
+  background: linear-gradient(180deg, rgba(0,0,0,0.28), transparent 42%, rgba(0,0,0,0.08));
 }
 
 .card p {
   position: absolute;
-  bottom: 12px;
-  left: 12px;
+  top: 52px;
+  left: 56px;
   margin: 0;
   color: white;
   z-index: 2;
   font-family: "Avenir Next", Avenir, "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 400;
-  letter-spacing: 0;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.card p::after {
+  content: "";
+  display: block;
+  width: 72px;
+  height: 1px;
+  margin-top: 6px;
+  background: rgba(255,255,255,0.86);
 }
 
 /* 品牌理念 */
@@ -849,11 +879,25 @@ body {
   margin-bottom: 32px;
 }
 
-.drawer-item img {
+.drawer-product-link,
+.drawer-item > img {
+  display: block;
+  width: 170px;
+  height: 240px;
+  background: #f7f7f7;
+}
+
+.drawer-product-link img,
+.drawer-item > img {
   width: 170px;
   height: 240px;
   object-fit: cover;
-  background: #f7f7f7;
+  display: block;
+  transition: opacity 0.2s ease;
+}
+
+.drawer-product-link:hover img {
+  opacity: 0.78;
 }
 
 .drawer-info {
@@ -970,7 +1014,9 @@ body {
     grid-template-columns: 120px 1fr;
   }
 
-  .drawer-item img {
+  .drawer-product-link,
+  .drawer-product-link img,
+  .drawer-item > img {
     width: 120px;
     height: 170px;
   }
@@ -1194,7 +1240,7 @@ body {
 </section>
 
 <section class="grid">
-  <a href="kiro.html" class="card">
+  <a href="kiro.html" class="card is-kiro">
     <img src="images/kiro-cover.png">
     <div class="overlay"></div>
     <p>KIRO Collection</p>
@@ -1364,14 +1410,49 @@ let isSearchOpen = false;
 
 function getCart() {
   try {
-    return JSON.parse(localStorage.getItem("cart")) || [];
+    return normalizeCart(JSON.parse(localStorage.getItem("cart")) || []);
   } catch (error) {
     return [];
   }
 }
 
+function getCartItemKey(item) {
+  return [
+    item.id || item.name || "",
+    item.color || "Black",
+    item.size || ""
+  ].join("::").toLowerCase();
+}
+
+function getProductUrl(item) {
+  const productUrls = {
+    "tevis-top": "kiro1.html",
+    "kilian-skirt": "kiro2.html",
+    "blake-clutch": "kiro3.html",
+    "milly-pump": "kiro4.html"
+  };
+  return item.url || productUrls[item.id] || "";
+}
+
+function normalizeCart(cart) {
+  return cart.reduce((merged, item) => {
+    if (!item) return merged;
+    const qty = Number(item.qty || 1);
+    if (qty <= 0) return merged;
+
+    const existing = merged.find(entry => getCartItemKey(entry) === getCartItemKey(item));
+    if (existing) {
+      existing.qty = Number(existing.qty || 0) + qty;
+    } else {
+      merged.push({...item, qty, url: getProductUrl(item)});
+    }
+
+    return merged;
+  }, []);
+}
+
 function saveCart(cart) {
-  localStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem("cart", JSON.stringify(normalizeCart(cart)));
 }
 
 function formatMoney(value) {
@@ -1408,9 +1489,12 @@ function renderCartDrawer() {
   }
 
   empty.style.display = "none";
-  items.innerHTML = cart.map((item, index) => `
-    <article class="drawer-item">
-      <img src="${item.image || "images/logo.png"}" alt="${item.name || "Product"}">
+  items.innerHTML = cart.map((item, index) => {
+    const url = getProductUrl(item);
+    const image = `<img src="${item.image || "images/logo.png"}" alt="${item.name || "Product"}">`;
+    return `
+      <article class="drawer-item">
+      ${url ? `<a class="drawer-product-link" href="${url}" aria-label="View ${item.name || "Product"}">${image}</a>` : image}
       <div class="drawer-info">
         <div>
           <p class="drawer-name">${item.name || "Product"}</p>
@@ -1425,7 +1509,8 @@ function renderCartDrawer() {
         <button class="drawer-remove" type="button" onclick="removeDrawerItem(${index})">Remove</button>
       </div>
     </article>
-  `).join("");
+    `;
+  }).join("");
 
   const total = cart.reduce((sum, item) => {
     return sum + Number(item.price || 0) * Number(item.qty || 0);
